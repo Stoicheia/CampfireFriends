@@ -13,6 +13,7 @@ namespace Minigame
         private void Start()
         {
             StartCoroutine(StartSequence());
+            _game.OnEnd += ShowEndScreen;
         }
 
         private IEnumerator StartSequence()
@@ -24,5 +25,12 @@ namespace Minigame
             yield return new WaitForSeconds(wait);
             _countdown.gameObject.SetActive(false);
         }
+
+        private void ShowEndScreen()
+        {
+            
+        }
+        
+        
     }
 }

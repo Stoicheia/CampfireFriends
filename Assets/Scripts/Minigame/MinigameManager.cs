@@ -13,6 +13,7 @@ namespace Minigame
         public event Action OnInit;
         public static event Action<ScanLine, bool, HitResult> OnHit;
         public static event Action<ScanLine, bool, ScanEvent> OnMiss;
+        public event Action<MinigameResults> OnEnd;
         
         [SerializeField] private MinigameDefinition _minigameConfig;
         [SerializeField] private List<ScanLine> _scanLines;
@@ -207,7 +208,15 @@ namespace Minigame
 
         private void HandleEnd()
         {
-            Debug.Log("End.");
+            Dictionary<PrimitiveItem, int> goodItems = new Dictionary<PrimitiveItem, int>();
+            foreach (var kvp in _itemsCollected)
+            {
+                if (GoodItems.Contains(kvp.Key))
+                {
+                    goodItems.Add(kvp.Key, (int)kvp.Value);
+                }
+            }
+            OnEnd?.Invoke(new MinigameResults(goodItems, (int)SumOfBadScores));
         }
     }
 }
