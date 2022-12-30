@@ -52,7 +52,7 @@ namespace Minigame
         private void Update()
         {
             if (!_started) return;
-            while(_ptr < _events.Count && Time > _events[_ptr + 1].TimeSeconds)
+            while(_ptr < _events.Count - 1 && Time > _events[_ptr + 1].TimeSeconds)
             {
                 _ptr++;
             }

@@ -241,6 +241,7 @@ namespace Minigame
 
             _results = new MinigameResults(goodItems, goodItemTotals, (int) SumOfBadScores, badItemTotal);
             _started = false;
+            if(_rhythmEngine.IsPlaying) _rhythmEngine.StopAudio();
             OnEnd?.Invoke(_results);
         }
 

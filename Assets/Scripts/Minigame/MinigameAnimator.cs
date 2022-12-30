@@ -16,6 +16,11 @@ namespace Minigame
             _game.OnEnd += ShowEndScreen;
         }
 
+        private void OnDisable()
+        {
+            ResetAll();
+        }
+
         public void Begin()
         {
             StartCoroutine(StartSequence());
@@ -35,6 +40,11 @@ namespace Minigame
         {
             _resultsScreen.gameObject.SetActive(true);
             _resultsScreen.Display(minigameResults);
+        }
+
+        private void ResetAll()
+        {
+            _resultsScreen.gameObject.SetActive(false);
         }
     }
 }

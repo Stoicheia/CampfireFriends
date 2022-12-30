@@ -240,18 +240,18 @@ PrefabInstance:
     - target: {fileID: 4801353679676996665, guid: 3f226b0a15ff3f248a8963185ae0961e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 204657734}
+      objectReference: {fileID: 1984847373}
     - target: {fileID: 4801353679676996665, guid: 3f226b0a15ff3f248a8963185ae0961e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4801353679676996665, guid: 3f226b0a15ff3f248a8963185ae0961e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BackToMenu
+      value: SaveAndExit
       objectReference: {fileID: 0}
     - target: {fileID: 4801353679676996665, guid: 3f226b0a15ff3f248a8963185ae0961e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UI.ResultsScreenUI, Assembly-CSharp
+      value: Minigame.MinigameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4801353679676996665, guid: 3f226b0a15ff3f248a8963185ae0961e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1148,6 +1148,7 @@ MonoBehaviour:
     TransitionWindowOutOfMinigame: {fileID: 0}
     MinigameManager: {fileID: 1984847373}
     MinigameAnimator: {fileID: 772884563}
+    MainManager: {fileID: 0}
 --- !u!4 &1019022720
 Transform:
   m_ObjectHideFlags: 0

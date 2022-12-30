@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Minigame;
 using UI;
@@ -21,15 +22,7 @@ namespace Core
 
         private void OnEnable()
         {
-            if(_ptr < _characters.Count)
-                StartCharacterInitialDialogue(_characters[_ptr]);
-            else
-            {
-                foreach (var c in _characters)
-                {
-                    StartCharacterFinalDialogue(c);
-                }
-            }
+            StartCoroutine(StartSequence());
         }
 
         private void OnDisable()
@@ -44,6 +37,19 @@ namespace Core
                 a.MyManager = this;
             }
             _data = PlayerData.Instance;
+        }
+
+        public void NextDialogue()
+        {
+            if(_ptr < _characters.Count)
+                StartCharacterInitialDialogue(_characters[_ptr]);
+            else
+            {
+                foreach (var c in _characters)
+                {
+                    StartCharacterFinalDialogue(c);
+                }
+            }
         }
 
         public void StartCharacterInitialDialogue(DialogeMan man)
@@ -62,6 +68,12 @@ namespace Core
             _startButton.Play("buttonUp");
             var button = _startButton.GetComponent<MinigameLaunchButton>();
             button.ToLaunch = config;
+        }
+
+        IEnumerator StartSequence()
+        {
+            yield return new WaitForSeconds(0.3f);
+            NextDialogue();
         }
     }
 }

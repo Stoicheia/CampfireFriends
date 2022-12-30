@@ -22,7 +22,6 @@ namespace Minigame
 
         private Dictionary<ScanEvent, SpriteRenderer> _eventSprites;
         private float Time => _scanLine.Time;
-
         public ScanLine Line => _scanLine;
         public Transform HitUISpawnPlace => _hitUISpawnPlace;
 
@@ -41,6 +40,9 @@ namespace Minigame
         {
             _scanLine.OnInit -= Init;
             _scanLine.OnHit -= Hit;
+            
+            foreach(var e in _eventSprites) Destroy(e.Value.gameObject);
+            _eventSprites.Clear();
         }
 
         private void Update()

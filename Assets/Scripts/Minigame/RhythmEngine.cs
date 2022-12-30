@@ -24,6 +24,8 @@ namespace Minigame
         public float Bpm => _bpm;
         public float OffsetSeconds => _offsetSeconds;
 
+        public bool IsPlaying => _audioSource.isPlaying;
+
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
@@ -41,6 +43,11 @@ namespace Minigame
         public void StartAudio(float countdown = 0)
         {
             StartCoroutine(Countdown(countdown));
+        }
+
+        public void StopAudio()
+        {
+            _audioSource.Stop();
         }
 
         public void SetParams(MinigameDefinition definition)

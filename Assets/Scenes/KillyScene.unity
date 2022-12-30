@@ -684,6 +684,7 @@ GameObject:
   - component: {fileID: 497455510}
   - component: {fileID: 497455509}
   - component: {fileID: 497455512}
+  - component: {fileID: 497455513}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -756,9 +757,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 170098479}
-        m_TargetAssemblyTypeName: Minigame.MinigameStarterTest, Assembly-CSharp
-        m_MethodName: StartMinigame
+      - m_Target: {fileID: 497455513}
+        m_TargetAssemblyTypeName: UI.MinigameLaunchButton, Assembly-CSharp
+        m_MethodName: Launch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -826,6 +827,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &497455513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497455507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3ad5cfe0fa4e58b5782fd09e0d0105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToLaunch: {fileID: 0}
 --- !u!1 &601422073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,7 +1351,7 @@ MonoBehaviour:
   - {fileID: 1566699438}
   - {fileID: 2061376360}
   - {fileID: 55160638}
-  _startButton: {fileID: 0}
+  _startButton: {fileID: 497455512}
 --- !u!1 &1287784872
 GameObject:
   m_ObjectHideFlags: 0
