@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Config_Test
   m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: d6d0fb87eb10b2e4a9fdba9bcd21cf72, type: 3}
-  _bpm: 90
+  _bpm: 120
   _offsetSeconds: 1
-  _goodItems:
-  - Item: {fileID: 11400000, guid: 0eeadaed1bb776647aa80c36df78cbe4, type: 2}
-    Quantity: 20
+  _goodItemList:
+  - {fileID: 11400000, guid: 6e670f917e99caf4db24b72ac6391d23, type: 2}
   _allPossibleItems:
   - {fileID: 11400000, guid: 0eeadaed1bb776647aa80c36df78cbe4, type: 2}
   - {fileID: 11400000, guid: 6e670f917e99caf4db24b72ac6391d23, type: 2}
-  _goodItemDensity: 0.472
+  _goodItemDensity: 0.365
+  _goodItemVariance: 0.0301
   _subdivisions: 2
   _leniencyBeats: 0.5
   _perfectExactness: 0.2
-  _approachSeconds: 4
+  _approachSeconds: 2

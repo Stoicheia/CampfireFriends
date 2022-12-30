@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Util;
+using Random = UnityEngine.Random;
 
 namespace Minigame
 {
@@ -21,9 +22,13 @@ namespace Minigame
         private bool _started;
 
         private Dictionary<PrimitiveItem, float> _itemsCollected;
+        private Dictionary<PrimitiveItem, int> _goodItemCounts;
 
-        public List<PrimitiveItem> GoodItems => _minigameConfig.GoodItems.Select(x => x.Item).ToList();
+        public List<PrimitiveItem> GoodItems => _minigameConfig.GoodItems;
         public float Bpm => _minigameConfig.Bpm;
+
+        private int TotalItemNumber =>
+            _scanLines.Count * _minigameConfig.TotalBeatCount / _minigameConfig.Subdivisions;
 
         public float SumOfBadScores => _itemsCollected
             .Where(x => !GoodItems.Contains(x.Key))
@@ -42,8 +47,9 @@ namespace Minigame
             _rhythmEngine.OnSongEnd += HandleEnd;
 
             _itemsCollected = new Dictionary<PrimitiveItem, float>();
+            PopulateGoodItems();
             ResetAllLines();
-            GenerateItemsToSpawn(_scanLines.Count * _minigameConfig.TotalBeatCount / _minigameConfig.Subdivisions);
+            GenerateItemsToSpawn(TotalItemNumber);
             DistributeToLines();
             _started = false;
         }
@@ -93,12 +99,12 @@ namespace Minigame
         
         public float GetMaxScore(PrimitiveItem item)
         {
-            var goodItems = _minigameConfig.GoodItems;
+            var goodItems = _goodItemCounts;
             foreach (var gi in goodItems)
             {
-                if (gi.Item.Equals(item))
+                if (gi.Key.Equals(item))
                 {
-                    return gi.Quantity;
+                    return gi.Value;
                 }
             }
 
@@ -147,11 +153,11 @@ namespace Minigame
         private void GenerateItemsToSpawn(int totalNumber)
         {
             List<PrimitiveItem> toSpawn = new List<PrimitiveItem>();
-            foreach (var pair in _minigameConfig.GoodItems)
+            foreach (var pair in _goodItemCounts)
             {
-                for (int i = 0; i < pair.Quantity; i++)
+                for (int i = 0; i < pair.Value; i++)
                 {
-                    toSpawn.Add(pair.Item);
+                    toSpawn.Add(pair.Key);
                 }
             }
 
@@ -162,6 +168,23 @@ namespace Minigame
             
             Utility.Shuffle(toSpawn);
             _itemsToSpawn = toSpawn;
+        }
+
+        private void PopulateGoodItems()
+        {
+            float density = _minigameConfig.GoodItemDensity +
+                            Random.Range(-_minigameConfig.GoodItemVariance, _minigameConfig.GoodItemVariance);
+            int goodNumber = (int)(TotalItemNumber * density);
+            _goodItemCounts = new Dictionary<PrimitiveItem, int>();
+            foreach (var gi in _minigameConfig.GoodItems)
+            {
+                _goodItemCounts.Add(gi, 0);
+            }
+            for (int i = 0; i < goodNumber; i++)
+            {
+                PrimitiveItem goodItem = GoodItems[Random.Range(0, GoodItems.Count)];
+                _goodItemCounts[goodItem]++;
+            }
         }
 
         private void ResetAllLines()
@@ -176,7 +199,7 @@ namespace Minigame
         {
             for (int i = 0; i < _itemsToSpawn.Count; i++)
             {
-                float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * _minigameConfig.Bpm * (i/4) / 60;
+                float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * (int)(i/4) * 60 / _minigameConfig.Bpm;
                 var line = _scanLines[i % _scanLines.Count];
                 line.AddEvent(new ScanEvent(_itemsToSpawn[i], time, line));
             }
