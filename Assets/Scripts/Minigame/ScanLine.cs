@@ -42,6 +42,7 @@ namespace Minigame
         public List<ScanEvent> Events => _events;
         public bool IsPressed => Input.GetKey(_key);
         public float LeniencySeconds { get; set; }
+        public float ApproachRate { get; set; }
 
         private void Awake()
         {

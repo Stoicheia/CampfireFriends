@@ -25,6 +25,7 @@ namespace Minigame
         public int Subdivisions => _subdivisions;
         public float LeniencySeconds => _leniencyBeats * 60 / _bpm;
         public float LeniencyPerfectSeconds => _perfectExactness * _leniencyBeats * 60 / _bpm;
+        public float ApproachSeconds => _approachSeconds;
 
         [SerializeField] private AudioClip _clip;
         [SerializeField] private float _bpm;
@@ -35,6 +36,7 @@ namespace Minigame
         [SerializeField] private int _subdivisions;
         [Space] [SerializeField] private float _leniencyBeats;
         [SerializeField][Range(0, 1)] private float _perfectExactness;
+        [SerializeField] private float _approachSeconds;
         
         public PrimitiveItem GetRandomItem()
         {

@@ -8,6 +8,7 @@ namespace UI
 
         public void InitCountdown(float bpm)
         {
+            gameObject.SetActive(true);
             _animator.speed = bpm / 60;
             _animator.Play("countdown", 0);
         }

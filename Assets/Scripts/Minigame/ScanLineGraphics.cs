@@ -35,6 +35,7 @@ namespace Minigame
         {
             _scanLine.OnInit += Init;
             _scanLine.OnHit += Hit;
+            _spawnBeforeSeconds = _scanLine.ApproachRate;
         }
         
         private void OnDisable()

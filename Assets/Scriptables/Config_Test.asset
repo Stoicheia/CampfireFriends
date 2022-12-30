@@ -21,6 +21,8 @@ MonoBehaviour:
   _allPossibleItems:
   - {fileID: 11400000, guid: 0eeadaed1bb776647aa80c36df78cbe4, type: 2}
   - {fileID: 11400000, guid: 6e670f917e99caf4db24b72ac6391d23, type: 2}
+  _goodItemDensity: 0.472
   _subdivisions: 2
   _leniencyBeats: 0.5
   _perfectExactness: 0.2
+  _approachSeconds: 4

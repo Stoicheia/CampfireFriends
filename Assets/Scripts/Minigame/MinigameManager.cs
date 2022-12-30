@@ -23,6 +23,7 @@ namespace Minigame
         private Dictionary<PrimitiveItem, float> _itemsCollected;
 
         public List<PrimitiveItem> GoodItems => _minigameConfig.GoodItems.Select(x => x.Item).ToList();
+        public float Bpm => _minigameConfig.Bpm;
 
         public float SumOfBadScores => _itemsCollected
             .Where(x => !GoodItems.Contains(x.Key))
@@ -35,6 +36,7 @@ namespace Minigame
             {
                 line.OnHit += ProcessHit;
                 line.OnMiss += ProcessMiss;
+                line.ApproachRate = _minigameConfig.ApproachSeconds;
             }
 
             _rhythmEngine.OnSongEnd += HandleEnd;
@@ -59,14 +61,14 @@ namespace Minigame
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space) && !_started)
+            /*if (Input.GetKey(KeyCode.Space) && !_started)
             {
                 StartGame();
                 _started = true;
-            }
+            }*/
         }
 
-        public void StartGame()
+        public void StartGame(float countdown)
         {
             foreach (var t in _scanLines)
             {
@@ -79,7 +81,7 @@ namespace Minigame
                 _itemsCollected[item] = 0;
             }
             _rhythmEngine.SetParams(_minigameConfig);
-            _rhythmEngine.StartAudio();
+            _rhythmEngine.StartAudio(countdown);
             
             OnInit?.Invoke();
         }
