@@ -155,7 +155,7 @@ namespace Minigame
 
             while (toSpawn.Count < totalNumber)
             {
-                toSpawn.Add(_minigameConfig.GetRandomItem());
+                toSpawn.Add(_minigameConfig.GetRandomBadItem());
             }
             
             Utility.Shuffle(toSpawn);
