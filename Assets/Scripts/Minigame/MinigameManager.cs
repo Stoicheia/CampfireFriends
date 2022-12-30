@@ -15,15 +15,18 @@ namespace Minigame
         private List<PrimitiveItem> _itemsToSpawn;
         private bool _started;
 
+        private Dictionary<PrimitiveItem, float> _itemsCollected;
+
         private void OnEnable()
         {
             foreach (var line in _scanLines)
             {
                 line.OnHit += ProcessHit;
             }
-            
+
+            _itemsCollected = new Dictionary<PrimitiveItem, float>();
             ResetAllLines();
-            GenerateItemsToSpawn(_scanLines.Count * _minigameConfig.TotalBeatCount / 4);
+            GenerateItemsToSpawn(_scanLines.Count * _minigameConfig.TotalBeatCount / _minigameConfig.Subdivisions);
             DistributeToLines();
             _started = false;
         }
@@ -51,13 +54,34 @@ namespace Minigame
             {
                 t.Init();
             }
+
+            foreach (var item in _minigameConfig.AllItems)
+            {
+                _itemsCollected[item] = 0;
+            }
             _rhythmEngine.SetParams(_minigameConfig);
             _rhythmEngine.StartAudio();
         }
 
         private void ProcessHit(ScanEvent @event, float t)
         {
-            Debug.Log($"{@event.RequestedObject.Name} collected at time {t}");
+            float error = t - @event.TimeSeconds;
+            Debug.Log($"{@event.RequestedObject.Name} collected with error {error}");
+
+            HitResult result;
+            if (Mathf.Abs(error) <= _minigameConfig.LeniencyPerfectSeconds) result = HitResult.Perfect;
+            else if (Mathf.Abs(error) <= _minigameConfig.LeniencySeconds) result = HitResult.Hit;
+            else result = HitResult.Miss;
+
+            float score = result switch
+            {
+                HitResult.Perfect => 1,
+                HitResult.Hit => 0.5f,
+                HitResult.Miss => 0
+            };
+
+            _itemsCollected[@event.RequestedObject] += score;
+            Debug.Log($"{@event.RequestedObject.Name} score = {_itemsCollected[@event.RequestedObject]}");
         }
 
         private void GenerateItemsToSpawn(int totalNumber)
@@ -92,7 +116,7 @@ namespace Minigame
         {
             for (int i = 0; i < _itemsToSpawn.Count; i++)
             {
-                float time = _minigameConfig.OffsetSeconds + 4 * _minigameConfig.Bpm * (i/4) / 60;
+                float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * _minigameConfig.Bpm * (i/4) / 60;
                 _scanLines[i % _scanLines.Count].AddEvent(new ScanEvent(_itemsToSpawn[i], time));
             }
         }

@@ -20,13 +20,20 @@ namespace Minigame
         public float Bpm => _bpm;
         public float OffsetSeconds => _offsetSeconds;
         public List<ItemQuantityPair> GoodItems => _goodItems;
+        public List<PrimitiveItem> AllItems => _allPossibleItems;
         public int TotalBeatCount => (int)Math.Floor(_bpm * _clip.length / 60);
+        public int Subdivisions => _subdivisions;
+        public float LeniencySeconds => _leniencyBeats * 60 / _bpm;
+        public float LeniencyPerfectSeconds => _perfectExactness * _leniencyBeats * 60 / _bpm;
 
         [SerializeField] private AudioClip _clip;
         [SerializeField] private float _bpm;
         [SerializeField] private float _offsetSeconds;
         [SerializeField] private List<ItemQuantityPair> _goodItems;
         [SerializeField] private List<PrimitiveItem> _allPossibleItems;
+        [SerializeField] private int _subdivisions;
+        [Space] [SerializeField] private float _leniencyBeats;
+        [SerializeField][Range(0, 1)] private float _perfectExactness;
         
         public PrimitiveItem GetRandomItem()
         {

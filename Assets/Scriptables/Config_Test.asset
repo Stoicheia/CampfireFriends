@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: d6d0fb87eb10b2e4a9fdba9bcd21cf72, type: 3}
   _bpm: 90
-  _offsetSeconds: 0
+  _offsetSeconds: 1
   _goodItems:
   - Item: {fileID: 11400000, guid: 0eeadaed1bb776647aa80c36df78cbe4, type: 2}
     Quantity: 5
   _allPossibleItems:
   - {fileID: 11400000, guid: 0eeadaed1bb776647aa80c36df78cbe4, type: 2}
   - {fileID: 11400000, guid: 6e670f917e99caf4db24b72ac6391d23, type: 2}
+  _subdivisions: 2
+  _leniencyBeats: 0.5
+  _perfectExactness: 0.3
