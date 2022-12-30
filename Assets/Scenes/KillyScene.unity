@@ -331,9 +331,9 @@ MonoBehaviour:
   dialogText: {fileID: 1249383910}
   dialogData: {fileID: 11400000, guid: 40ad01b5fc8d1884d9b125d76635de6d, type: 2}
   SkipButton: 101
-  letterDelay: 0.1
+  letterDelay: 0.03
   MinigameGiver: {fileID: 55160637}
-  AnimalType: 0
+  AnimalType: 2
   FixedInitialDialogue: {fileID: 11400000, guid: 1e751a7d8249fc64fb713c4da8c741e4, type: 2}
   MyManager: {fileID: 0}
 --- !u!114 &55160639
@@ -1001,6 +1001,7 @@ MonoBehaviour:
     TransitionWindowOutOfMinigame: {fileID: 0}
     MinigameManager: {fileID: 0}
     MinigameAnimator: {fileID: 0}
+    MainManager: {fileID: 1270308960}
 --- !u!4 &918355350
 Transform:
   m_ObjectHideFlags: 0
@@ -1979,9 +1980,9 @@ MonoBehaviour:
   dialogText: {fileID: 1879304118}
   dialogData: {fileID: 11400000, guid: 40ad01b5fc8d1884d9b125d76635de6d, type: 2}
   SkipButton: 101
-  letterDelay: 0.1
+  letterDelay: 0.03
   MinigameGiver: {fileID: 2061376359}
-  AnimalType: 0
+  AnimalType: 1
   FixedInitialDialogue: {fileID: 11400000, guid: 1e751a7d8249fc64fb713c4da8c741e4, type: 2}
   MyManager: {fileID: 0}
 --- !u!114 &2061376361

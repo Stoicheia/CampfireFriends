@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Minigame;
+using UnityEngine;
 
 namespace Core
 {
     public class PlayerData : MonoBehaviour
     {
         public static PlayerData Instance;
+
+        private Dictionary<AnimalType, MinigameResults> _animalToResults;
 
         private void Awake()
         {
@@ -15,6 +19,12 @@ namespace Core
             }
             
             Instance = this;
+            _animalToResults = new Dictionary<AnimalType, MinigameResults>();
+        }
+
+        public void AddResult(AnimalType a, MinigameResults r)
+        {
+            _animalToResults.Add(a, r);
         }
     }
 }

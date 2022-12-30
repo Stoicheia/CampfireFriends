@@ -17,8 +17,9 @@ namespace Core
 
         public MinigameManager MinigameManager;
         public MinigameAnimator MinigameAnimator;
+        public MainGameManager MainManager;
 
-        public NavigationElements(Camera mainSceneCamera, Canvas mainSceneCanvas, Camera minigameCamera, Canvas minigameCanvas, Animator transitionWindowIntoMinigame, Animator transitionWindowOutOfMinigame, MinigameManager minigameManager, MinigameAnimator minigameAnimator)
+        public NavigationElements(Camera mainSceneCamera, Canvas mainSceneCanvas, Camera minigameCamera, Canvas minigameCanvas, Animator transitionWindowIntoMinigame, Animator transitionWindowOutOfMinigame, MinigameManager minigameManager, MinigameAnimator minigameAnimator, MainGameManager mgm)
         {
             MainSceneCamera = mainSceneCamera;
             MainSceneCanvas = mainSceneCanvas;
@@ -28,6 +29,7 @@ namespace Core
             TransitionWindowOutOfMinigame = transitionWindowOutOfMinigame;
             MinigameManager = minigameManager;
             MinigameAnimator = minigameAnimator;
+            MainManager = mgm;
         }
 
         public NavigationElements Add(NavigationElements add)
@@ -40,7 +42,8 @@ namespace Core
                 TransitionWindowIntoMinigame == null ? add.TransitionWindowIntoMinigame : TransitionWindowIntoMinigame,
                 TransitionWindowOutOfMinigame == null ? add.TransitionWindowOutOfMinigame : TransitionWindowOutOfMinigame,
                 MinigameManager == null ? add.MinigameManager : MinigameManager,
-                MinigameAnimator == null ? add.MinigameAnimator : MinigameAnimator
+                MinigameAnimator == null ? add.MinigameAnimator : MinigameAnimator,
+                MainManager == null ? add.MainManager : MainManager
             );
         }
     }
@@ -83,6 +86,7 @@ namespace Core
             yield return new WaitForSeconds(1);
             NavigationData.MinigameManager.SetConfig(config);
             NavigationData.MinigameManager.gameObject.SetActive(true);
+            NavigationData.MainManager.gameObject.SetActive(false);
             NavigationData.MainSceneCamera.gameObject.SetActive(false);
             NavigationData.MainSceneCanvas.gameObject.SetActive(false);
             NavigationData.MinigameCamera.gameObject.SetActive(true);
@@ -107,6 +111,7 @@ namespace Core
             yield return new WaitForSeconds(0.5f);
             NavigationData.TransitionWindowOutOfMinigame.Play("out");
             NavigationData.MinigameManager.gameObject.SetActive(false);
+            NavigationData.MainManager.gameObject.SetActive(true);
             yield return new WaitForSeconds(2);
             NavigationData.TransitionWindowOutOfMinigame.gameObject.SetActive(false);
         }

@@ -29,6 +29,8 @@ namespace Minigame
         public float GoodItemVariance => _goodItemVariance;
         public List<ItemData> GoodItems => _goodItemList;
 
+        public AnimalType Animal;
+
         [SerializeField] private AudioClip _clip;
         [SerializeField] private float _bpm;
         [SerializeField] private float _offsetSeconds;

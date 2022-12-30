@@ -10,6 +10,8 @@ namespace Entity
         [SerializeField] private MinigameDefinition _myMinigame;
         private DialogeMan _dialoge;
 
+        public MinigameDefinition Config => _myMinigame;
+
         private void Awake()
         {
             _dialoge = GetComponent<DialogeMan>();

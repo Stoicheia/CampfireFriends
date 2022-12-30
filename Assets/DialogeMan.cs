@@ -81,7 +81,7 @@ public class DialogeMan : MonoBehaviour
             }
         }
 
-        MyManager.ShowStartButton();
+        MyManager.ShowStartButton(MinigameGiver.Config);
     }
 
     IEnumerator RunLine(string d)

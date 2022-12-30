@@ -247,6 +247,7 @@ namespace Minigame
         private MinigameResults _results;
         public void SaveAndExit()
         {
+            PlayerData.Instance.AddResult(_minigameConfig.Animal, _results);
             SceneCameraNavigator.Instance.TransitionToMain();
         }
     }
