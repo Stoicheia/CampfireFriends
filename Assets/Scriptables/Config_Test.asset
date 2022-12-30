@@ -16,10 +16,11 @@ MonoBehaviour:
   _bpm: 120
   _offsetSeconds: 1
   _goodItemList:
-  - {fileID: 11400000, guid: 6e670f917e99caf4db24b72ac6391d23, type: 2}
+  - {fileID: 11400000, guid: b6bb0423129f3a34aac1d5dff1ef7de0, type: 2}
   _allPossibleItems:
-  - {fileID: 11400000, guid: 0eeadaed1bb776647aa80c36df78cbe4, type: 2}
-  - {fileID: 11400000, guid: 6e670f917e99caf4db24b72ac6391d23, type: 2}
+  - {fileID: 11400000, guid: e55ac71b4844fd64aaa08690140981ef, type: 2}
+  - {fileID: 11400000, guid: b6bb0423129f3a34aac1d5dff1ef7de0, type: 2}
+  - {fileID: 11400000, guid: cc19f40d931f58f4abfd818e3468565b, type: 2}
   _goodItemDensity: 0.365
   _goodItemVariance: 0.0301
   _subdivisions: 2

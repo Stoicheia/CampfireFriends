@@ -13,8 +13,12 @@ namespace Minigame
 
         private void Start()
         {
-            StartCoroutine(StartSequence());
             _game.OnEnd += ShowEndScreen;
+        }
+
+        public void Begin()
+        {
+            StartCoroutine(StartSequence());
         }
 
         private IEnumerator StartSequence()

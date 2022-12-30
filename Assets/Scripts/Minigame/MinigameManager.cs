@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using UnityEngine;
 using Util;
 using Random = UnityEngine.Random;
@@ -36,6 +37,11 @@ namespace Minigame
             .Select(x => x.Value)
             .Aggregate((x, y) => x + y);
 
+        public void SetConfig(MinigameDefinition config)
+        {
+            _minigameConfig = config;
+        }
+
         private void OnEnable()
         {
             foreach (var line in _scanLines)
@@ -68,11 +74,11 @@ namespace Minigame
 
         private void Update()
         {
-            /*if (Input.GetKey(KeyCode.Space) && !_started)
+            if (Input.GetKey(KeyCode.Space) && !_started)
             {
-                StartGame();
+                HandleEnd();
                 _started = true;
-            }*/
+            }
         }
 
         public void StartGame(float countdown)
@@ -105,7 +111,7 @@ namespace Minigame
             {
                 if (gi.Key.Equals(item))
                 {
-                    return gi.Value;
+                    return gi.Value * 3;
                 }
             }
 
@@ -226,7 +232,7 @@ namespace Minigame
             {
                 if (GoodItems.Contains(item))
                 {
-                    goodItemTotals[item]++;
+                    goodItemTotals[item] += 3;
                 }
                 else
                 {
@@ -234,10 +240,14 @@ namespace Minigame
                 }
             }
 
-            
-            
-            
-            OnEnd?.Invoke(new MinigameResults(goodItems, goodItemTotals, (int)SumOfBadScores, badItemTotal));
+            _results = new MinigameResults(goodItems, goodItemTotals, (int) SumOfBadScores, badItemTotal);
+            OnEnd?.Invoke(_results);
+        }
+
+        private MinigameResults _results;
+        public void SaveAndExit()
+        {
+            SceneCameraNavigator.Instance.TransitionToMain();
         }
     }
 }

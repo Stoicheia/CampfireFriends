@@ -35,7 +35,6 @@ namespace Minigame
         {
             _scanLine.OnInit += Init;
             _scanLine.OnHit += Hit;
-            _spawnBeforeSeconds = _scanLine.ApproachRate;
         }
         
         private void OnDisable()
@@ -74,6 +73,7 @@ namespace Minigame
                 _eventSprites.Add(s, obj);
                 obj.enabled = false;
             }
+            _spawnBeforeSeconds = _scanLine.ApproachRate;
         }
 
         private void Hit(ScanEvent scanEvent, float f)
