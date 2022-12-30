@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 namespace Minigame
 {
@@ -38,14 +39,15 @@ namespace Minigame
                 ScanEvent @event = s.Key;
                 SpriteRenderer sprite = s.Value;
 
-                float timeSpawn = s.Key.TimeSeconds - _spawnBeforeSeconds;
-                float timeDespawn = s.Key.TimeSeconds + _despawnAfterSeconds;
+                float timeSpawn = @event.TimeSeconds - _spawnBeforeSeconds;
+                float timeDespawn = @event.TimeSeconds + _despawnAfterSeconds;
 
                 sprite.enabled = Time >= timeSpawn && Time <= timeDespawn;
                 if (sprite.enabled)
                 {
-                    float t = Mathf.InverseLerp(timeSpawn, s.Key.TimeSeconds, Time);
+                    float t = Utility.InverseLerpUnclamped(timeSpawn, @event.TimeSeconds, Time);
                     sprite.transform.position = Vector3.LerpUnclamped(_top.position, _bottom.position, t);
+                    sprite.sprite = @event.RequestedObject.Sprite;
                 }
             }
         }

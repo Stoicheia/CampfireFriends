@@ -21,7 +21,8 @@ namespace Minigame
             {
                 line.OnHit += ProcessHit;
             }
-
+            
+            ResetAllLines();
             GenerateItemsToSpawn(_scanLines.Count * _minigameConfig.TotalBeatCount / 4);
             DistributeToLines();
             _started = false;
@@ -77,6 +78,14 @@ namespace Minigame
             
             Utility.Shuffle(toSpawn);
             _itemsToSpawn = toSpawn;
+        }
+
+        private void ResetAllLines()
+        {
+            foreach (var l in _scanLines)
+            {
+                l.Reset();
+            }
         }
 
         private void DistributeToLines()

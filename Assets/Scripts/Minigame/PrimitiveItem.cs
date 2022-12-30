@@ -2,7 +2,7 @@
 
 namespace Minigame
 {
-    [CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
+    [CreateAssetMenu(fileName = "Item (proto)", menuName = "Primitive Item", order = 0)]
     public class PrimitiveItem : ScriptableObject
     {
         public string Name;

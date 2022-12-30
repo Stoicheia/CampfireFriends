@@ -23,18 +23,27 @@ namespace Minigame
         public event Action OnInit;
         public event Action<ScanEvent, float> OnHit; 
 
-        private RhythmEngine _engine;
+        [SerializeField] private RhythmEngine _engine;
+        [SerializeField] private KeyCode _key;
         private List<ScanEvent> _events;
         private int _ptr;
 
         private ScanEvent _lastEvent;
         private ScanEvent _nextEvent;
 
+        private bool _started;
+
         public float Time => _engine.CurrentTimeSeconds;
         public List<ScanEvent> Events => _events;
 
+        private void Awake()
+        {
+            _started = false;
+        }
+
         private void Update()
         {
+            if (!_started) return;
             while(_ptr < _events.Count && Time > _events[_ptr + 1].TimeSeconds)
             {
                 _ptr++;
@@ -42,6 +51,11 @@ namespace Minigame
 
             _lastEvent = _events[_ptr];
             _nextEvent = _events[_ptr + 1];
+
+            if (Input.GetKeyDown(_key))
+            {
+                Hit();
+            }
         }
         
         public void Reset()
@@ -58,6 +72,7 @@ namespace Minigame
         public void Init()
         {
             SortEventsByTime();
+            _started = true;
             OnInit?.Invoke();
         }
         
