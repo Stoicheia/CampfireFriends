@@ -10,7 +10,7 @@ namespace UI
         [SerializeField] private MinigameManager _game;
         [Space] [SerializeField] private List<MinigameScoreUI> _scoreUIs;
         [SerializeField] private MinigameScoreUISimple _junkScoreUI;
-        private Dictionary<PrimitiveItem, MinigameScoreUI> _itemToScoreUI;
+        private Dictionary<ItemData, MinigameScoreUI> _itemToScoreUI;
         [SerializeField] private ProgressBarUI _progressUI;
 
         private bool _started = false;
@@ -28,7 +28,7 @@ namespace UI
 
         private void Awake()
         {
-            _itemToScoreUI = new Dictionary<PrimitiveItem, MinigameScoreUI>();
+            _itemToScoreUI = new Dictionary<ItemData, MinigameScoreUI>();
         }
 
         private void Update()
@@ -36,7 +36,7 @@ namespace UI
             if (!_started) return;
             foreach (var ui in _itemToScoreUI)
             {
-                PrimitiveItem item = ui.Key;
+                ItemData item = ui.Key;
                 ui.Value.Set(_game.GetScore(item), _game.GetMaxScore(item), ui.Key.Sprite);
             }
             _junkScoreUI.Set(_game.SumOfBadScores);
@@ -45,7 +45,7 @@ namespace UI
 
         private void Init()
         {
-            _itemToScoreUI = new Dictionary<PrimitiveItem, MinigameScoreUI>();
+            _itemToScoreUI = new Dictionary<ItemData, MinigameScoreUI>();
             for (int i = 0; i < Math.Min(_scoreUIs.Count, _game.GoodItems.Count); i++)
             {
                 _itemToScoreUI.Add(_game.GoodItems[i], _scoreUIs[i]);

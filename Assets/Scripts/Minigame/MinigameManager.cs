@@ -19,13 +19,13 @@ namespace Minigame
         [SerializeField] private List<ScanLine> _scanLines;
         [SerializeField] private RhythmEngine _rhythmEngine;
 
-        private List<PrimitiveItem> _itemsToSpawn;
+        private List<ItemData> _itemsToSpawn;
         private bool _started;
 
-        private Dictionary<PrimitiveItem, float> _itemsCollected;
-        private Dictionary<PrimitiveItem, int> _goodItemCounts;
+        private Dictionary<ItemData, float> _itemsCollected;
+        private Dictionary<ItemData, int> _goodItemCounts;
 
-        public List<PrimitiveItem> GoodItems => _minigameConfig.GoodItems;
+        public List<ItemData> GoodItems => _minigameConfig.GoodItems;
         public float Bpm => _minigameConfig.Bpm;
 
         private int TotalItemNumber =>
@@ -47,7 +47,7 @@ namespace Minigame
 
             _rhythmEngine.OnSongEnd += HandleEnd;
 
-            _itemsCollected = new Dictionary<PrimitiveItem, float>();
+            _itemsCollected = new Dictionary<ItemData, float>();
             PopulateGoodItems();
             ResetAllLines();
             GenerateItemsToSpawn(TotalItemNumber);
@@ -93,12 +93,12 @@ namespace Minigame
             OnInit?.Invoke();
         }
 
-        public float GetScore(PrimitiveItem item)
+        public float GetScore(ItemData item)
         {
             return _itemsCollected[item];
         }
         
-        public float GetMaxScore(PrimitiveItem item)
+        public float GetMaxScore(ItemData item)
         {
             var goodItems = _goodItemCounts;
             foreach (var gi in goodItems)
@@ -153,7 +153,7 @@ namespace Minigame
 
         private void GenerateItemsToSpawn(int totalNumber)
         {
-            List<PrimitiveItem> toSpawn = new List<PrimitiveItem>();
+            List<ItemData> toSpawn = new List<ItemData>();
             foreach (var pair in _goodItemCounts)
             {
                 for (int i = 0; i < pair.Value; i++)
@@ -176,14 +176,14 @@ namespace Minigame
             float density = _minigameConfig.GoodItemDensity +
                             Random.Range(-_minigameConfig.GoodItemVariance, _minigameConfig.GoodItemVariance);
             int goodNumber = (int)(TotalItemNumber * density);
-            _goodItemCounts = new Dictionary<PrimitiveItem, int>();
+            _goodItemCounts = new Dictionary<ItemData, int>();
             foreach (var gi in _minigameConfig.GoodItems)
             {
                 _goodItemCounts.Add(gi, 0);
             }
             for (int i = 0; i < goodNumber; i++)
             {
-                PrimitiveItem goodItem = GoodItems[Random.Range(0, GoodItems.Count)];
+                ItemData goodItem = GoodItems[Random.Range(0, GoodItems.Count)];
                 _goodItemCounts[goodItem]++;
             }
         }
@@ -208,7 +208,7 @@ namespace Minigame
 
         private void HandleEnd()
         {
-            Dictionary<PrimitiveItem, int> goodItems = new Dictionary<PrimitiveItem, int>();
+            Dictionary<ItemData, int> goodItems = new Dictionary<ItemData, int>();
             foreach (var kvp in _itemsCollected)
             {
                 if (GoodItems.Contains(kvp.Key))

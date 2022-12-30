@@ -4,10 +4,10 @@ namespace Minigame
 {
     public struct MinigameResults
     {
-        public Dictionary<PrimitiveItem, int> GoodItemScores;
+        public Dictionary<ItemData, int> GoodItemScores;
         public int BadItemScore;
 
-        public MinigameResults(Dictionary<PrimitiveItem, int> dict, int bad)
+        public MinigameResults(Dictionary<ItemData, int> dict, int bad)
         {
             GoodItemScores = dict;
             BadItemScore = bad;

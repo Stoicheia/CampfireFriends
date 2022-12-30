@@ -12,14 +12,14 @@ namespace Minigame
         [Serializable]
         public class ItemQuantityPair
         {
-            public PrimitiveItem Item;
+            public ItemData Item;
             public int Quantity;
         }
         
         public AudioClip Clip => _clip;
         public float Bpm => _bpm;
         public float OffsetSeconds => _offsetSeconds;
-        public List<PrimitiveItem> AllItems => _allPossibleItems;
+        public List<ItemData> AllItems => _allPossibleItems;
         public int TotalBeatCount => (int)Math.Floor(_bpm * _clip.length / 60);
         public int Subdivisions => _subdivisions;
         public float LeniencySeconds => _leniencyBeats * 60 / _bpm;
@@ -27,13 +27,13 @@ namespace Minigame
         public float ApproachSeconds => _approachSeconds;
         public float GoodItemDensity => _goodItemDensity;
         public float GoodItemVariance => _goodItemVariance;
-        public List<PrimitiveItem> GoodItems => _goodItemList;
+        public List<ItemData> GoodItems => _goodItemList;
 
         [SerializeField] private AudioClip _clip;
         [SerializeField] private float _bpm;
         [SerializeField] private float _offsetSeconds;
-        [SerializeField] private List<PrimitiveItem> _goodItemList;
-        [SerializeField] private List<PrimitiveItem> _allPossibleItems;
+        [SerializeField] private List<ItemData> _goodItemList;
+        [SerializeField] private List<ItemData> _allPossibleItems;
         [SerializeField] [Range(0, 0.9f)] private float _goodItemDensity;
         [SerializeField] [Range(0, 0.1f)] private float _goodItemVariance;
         [SerializeField] private int _subdivisions;
@@ -41,16 +41,16 @@ namespace Minigame
         [SerializeField][Range(0, 1)] private float _perfectExactness;
         [SerializeField] private float _approachSeconds;
         
-        public PrimitiveItem GetRandomItem()
+        public ItemData GetRandomItem()
         {
-            PrimitiveItem item = _allPossibleItems[Random.Range(0, _allPossibleItems.Count)];
+            ItemData item = _allPossibleItems[Random.Range(0, _allPossibleItems.Count)];
             return item;
         }
 
-        public PrimitiveItem GetRandomBadItem()
+        public ItemData GetRandomBadItem()
         {
-            PrimitiveItem item = null;
-            List<PrimitiveItem> disallowed = _goodItemList;
+            ItemData item = null;
+            List<ItemData> disallowed = _goodItemList;
 
             while (disallowed.Contains(item) || item == null)
             {

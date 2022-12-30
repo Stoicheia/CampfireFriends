@@ -10,10 +10,10 @@ namespace Minigame
     public class ScanEvent
     {
         public ScanLine FromLine { get; set; }
-        public PrimitiveItem RequestedObject { get; set; }
+        public ItemData RequestedObject { get; set; }
         public float TimeSeconds { get; set; }
 
-        public ScanEvent(PrimitiveItem item, float time, ScanLine line)
+        public ScanEvent(ItemData item, float time, ScanLine line)
         {
             RequestedObject = item;
             TimeSeconds = time;
