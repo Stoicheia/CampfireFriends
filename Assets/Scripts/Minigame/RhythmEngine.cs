@@ -13,6 +13,7 @@ namespace Minigame
         private AudioSource _audioSource;
 
         public float CurrentTimeSeconds => (float)_audioSource.timeSamples / _clip.frequency;
+        public float TotalTimeSeconds => _clip.length;
         public float CurrentTimeBeats => _bpm * CurrentTimeSeconds / 60;
         public float Bpm => _bpm;
         public float OffsetSeconds => _offsetSeconds;

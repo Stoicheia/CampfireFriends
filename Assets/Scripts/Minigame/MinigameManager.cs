@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Util;
 
@@ -8,6 +9,8 @@ namespace Minigame
 {
     public class MinigameManager : MonoBehaviour
     {
+        public event Action OnInit;
+        
         [SerializeField] private MinigameDefinition _minigameConfig;
         [SerializeField] private List<ScanLine> _scanLines;
         [SerializeField] private RhythmEngine _rhythmEngine;
@@ -16,6 +19,13 @@ namespace Minigame
         private bool _started;
 
         private Dictionary<PrimitiveItem, float> _itemsCollected;
+
+        public List<PrimitiveItem> GoodItems => _minigameConfig.GoodItems.Select(x => x.Item).ToList();
+
+        public float SumOfBadScores => _itemsCollected
+            .Where(x => !GoodItems.Contains(x.Key))
+            .Select(x => x.Value)
+            .Aggregate((x, y) => x + y);
 
         private void OnEnable()
         {
@@ -61,6 +71,32 @@ namespace Minigame
             }
             _rhythmEngine.SetParams(_minigameConfig);
             _rhythmEngine.StartAudio();
+            
+            OnInit?.Invoke();
+        }
+
+        public float GetScore(PrimitiveItem item)
+        {
+            return _itemsCollected[item];
+        }
+        
+        public float GetMaxScore(PrimitiveItem item)
+        {
+            var goodItems = _minigameConfig.GoodItems;
+            foreach (var gi in goodItems)
+            {
+                if (gi.Item.Equals(item))
+                {
+                    return gi.Quantity;
+                }
+            }
+
+            return -1;
+        }
+
+        public float GetSongProgress()
+        {
+            return _rhythmEngine.CurrentTimeSeconds / _rhythmEngine.TotalTimeSeconds;
         }
 
         private void ProcessHit(ScanEvent @event, float t)
