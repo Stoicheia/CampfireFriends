@@ -31,6 +31,7 @@ namespace Minigame
         [SerializeField] private float _offsetSeconds;
         [SerializeField] private List<ItemQuantityPair> _goodItems;
         [SerializeField] private List<PrimitiveItem> _allPossibleItems;
+        [SerializeField] [Range(0, 1)] private float _goodItemDensity;
         [SerializeField] private int _subdivisions;
         [Space] [SerializeField] private float _leniencyBeats;
         [SerializeField][Range(0, 1)] private float _perfectExactness;
