@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51eef6ef2c5b2f49aaf4f673edd0f75, type: 3}
+  m_Name: Dialog[1]
+  m_EditorClassIdentifier: 
+  randomQuanityMax: 3
+  requestAmount: 2
+  possibleGivenItems:
+  - {fileID: 11400000, guid: b6bb0423129f3a34aac1d5dff1ef7de0, type: 2}
+  - {fileID: 11400000, guid: e55ac71b4844fd64aaa08690140981ef, type: 2}
+  - {fileID: 11400000, guid: cc19f40d931f58f4abfd818e3468565b, type: 2}
+  ChosenItems:
+  - {fileID: 11400000, guid: b6bb0423129f3a34aac1d5dff1ef7de0, type: 2}
+  - {fileID: 11400000, guid: b6bb0423129f3a34aac1d5dff1ef7de0, type: 2}
+  ChosenQuanityForEach: 0100000002000000
+  endResultDialoge:
+  - resultPercent: 40
+    EndDialog: Welp its Fine you Tried.
+  - resultPercent: 75
+    EndDialog: Thanks Alot! It will help me quite alot!
