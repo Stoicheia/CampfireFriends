@@ -76,7 +76,8 @@ namespace Minigame
         {
             _ptr = 0;
             _missPtr = 0;
-            _events = new List<ScanEvent>();
+            if (_events == null) _events = new List<ScanEvent>();
+            _events.Clear();
         }
 
         public void AddEvent(ScanEvent e)

@@ -31,6 +31,7 @@ namespace Minigame
             _game.enabled = true;
             _countdown.InitCountdown(_game.Bpm);
             float wait = 4.5f * 60 / _game.Bpm;
+            yield return null;
             _game.StartGame(wait);
             yield return new WaitForSeconds(wait);
             _countdown.gameObject.SetActive(false);

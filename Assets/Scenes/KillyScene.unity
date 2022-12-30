@@ -1549,7 +1549,7 @@ MonoBehaviour:
   dialogText: {fileID: 473430040}
   dialogData: {fileID: 11400000, guid: 40ad01b5fc8d1884d9b125d76635de6d, type: 2}
   SkipButton: 101
-  letterDelay: 0.1
+  letterDelay: 0.02
   MinigameGiver: {fileID: 1566699442}
   AnimalType: 0
   FixedInitialDialogue: {fileID: 11400000, guid: 1e751a7d8249fc64fb713c4da8c741e4, type: 2}

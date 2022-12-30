@@ -65,6 +65,7 @@ namespace Core
 
         public void ShowStartButton(MinigameDefinition config)
         {
+            _startButton.gameObject.SetActive(true);
             _startButton.Play("buttonUp");
             var button = _startButton.GetComponent<MinigameLaunchButton>();
             button.ToLaunch = config;
@@ -72,6 +73,7 @@ namespace Core
 
         IEnumerator StartSequence()
         {
+            _startButton.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.3f);
             NextDialogue();
         }

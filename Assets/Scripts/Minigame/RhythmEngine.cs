@@ -59,6 +59,7 @@ namespace Minigame
 
         private IEnumerator Countdown(float t)
         {
+            _audioSource.Stop();
             _countdownTimer = -t;
             _inCountdown = true;
             while (_countdownTimer < 0)

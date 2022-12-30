@@ -86,15 +86,16 @@ namespace Core
             yield return new WaitForSeconds(1);
             NavigationData.MinigameManager.SetConfig(config);
             NavigationData.MinigameManager.gameObject.SetActive(true);
+            NavigationData.MinigameAnimator.gameObject.SetActive(true);
             NavigationData.MainManager.gameObject.SetActive(false);
             NavigationData.MainSceneCamera.gameObject.SetActive(false);
             NavigationData.MainSceneCanvas.gameObject.SetActive(false);
             NavigationData.MinigameCamera.gameObject.SetActive(true);
+            NavigationData.MinigameCanvas.gameObject.SetActive(true);
+            NavigationData.MinigameAnimator.Begin();
             yield return new WaitForSeconds(0.5f);
             NavigationData.TransitionWindowIntoMinigame.Play("out");
             yield return new WaitForSeconds(0.5f);
-            NavigationData.MinigameCanvas.gameObject.SetActive(true);
-            NavigationData.MinigameAnimator.Begin();
             yield return new WaitForSeconds(1);
             NavigationData.TransitionWindowIntoMinigame.gameObject.SetActive(false);
         }
@@ -111,6 +112,7 @@ namespace Core
             yield return new WaitForSeconds(0.5f);
             NavigationData.TransitionWindowOutOfMinigame.Play("out");
             NavigationData.MinigameManager.gameObject.SetActive(false);
+            NavigationData.MinigameAnimator.gameObject.SetActive(false);
             NavigationData.MainManager.gameObject.SetActive(true);
             yield return new WaitForSeconds(2);
             NavigationData.TransitionWindowOutOfMinigame.gameObject.SetActive(false);

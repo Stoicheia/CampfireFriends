@@ -69,6 +69,11 @@ namespace Minigame
 
         private void Init()
         {
+            foreach (var es in _eventSprites)
+            {
+                Destroy(es.Value.gameObject);
+            }
+            _eventSprites.Clear();
             foreach (var s in _scanLine.Events)
             {
                 SpriteRenderer obj = Instantiate(_spritePrefab, transform).GetComponent<SpriteRenderer>();
