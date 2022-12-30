@@ -216,7 +216,28 @@ namespace Minigame
                     goodItems.Add(kvp.Key, (int)kvp.Value);
                 }
             }
-            OnEnd?.Invoke(new MinigameResults(goodItems, (int)SumOfBadScores));
+            Dictionary<ItemData, int> goodItemTotals = new Dictionary<ItemData, int>();
+            int badItemTotal = 0;
+            foreach (var item in GoodItems)
+            {
+                goodItemTotals[item] = 0;
+            }
+            foreach (var item in _itemsToSpawn)
+            {
+                if (GoodItems.Contains(item))
+                {
+                    goodItemTotals[item]++;
+                }
+                else
+                {
+                    badItemTotal++;
+                }
+            }
+
+            
+            
+            
+            OnEnd?.Invoke(new MinigameResults(goodItems, goodItemTotals, (int)SumOfBadScores, badItemTotal));
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Minigame
     public class MinigameAnimator : MonoBehaviour
     {
         [SerializeField] private CountdownUI _countdown;
+        [SerializeField] private ResultsScreenUI _resultsScreen;
         [SerializeField] private MinigameManager _game;
 
         private void Start()
@@ -28,7 +29,8 @@ namespace Minigame
 
         private void ShowEndScreen(MinigameResults minigameResults)
         {
-            
+            _resultsScreen.gameObject.SetActive(true);
+            _resultsScreen.Display(minigameResults);
         }
     }
 }
