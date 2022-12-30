@@ -1,7 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core;
+using Entity;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum AnimalType
+{
+    Bear, Squirrel, Fox
+}
 
 public class DialogeMan : MonoBehaviour
 {
@@ -21,37 +29,73 @@ public class DialogeMan : MonoBehaviour
     public KeyCode SkipButton;
     public float letterDelay;
 
+    public MinigameGiver MinigameGiver;
+    public AnimalType AnimalType;
+
+    public DialogueSequenceAsset FixedInitialDialogue;
+
+    private List<string> _dialogueLinesInitial;
+    private List<string> _dialogueLinesFinal;
+
+    public MainGameManager MyManager;
+    private void Awake()
+    {
+        _dialogueLinesInitial = FixedInitialDialogue.Lines;
+        _dialogueLinesFinal = new List<string>();
+        switch (AnimalType)
+        {
+            case AnimalType.Bear:
+                _dialogueLinesFinal.Add("sdsds");
+                break;
+        }
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(SkipButton) && !finishedTalking && !isTalking)
-            StartCoroutine(RunDialog());
-
         dialogText.text = text_preview;
     }
 
-
-    IEnumerator RunDialog()
+    public void RunInitial()
     {
-        string ItemsRequired = "";
-        for (int i = 0; i < dialogData.requestAmount; i++)
+        StartCoroutine(RunLines(_dialogueLinesInitial));
+    }
+    
+    public void RunFinal()
+    {
+        StartCoroutine(RunLines(_dialogueLinesFinal));
+    }
+
+    IEnumerator RunLines(List<string> lines)
+    {
+        for (int i = 0; i < lines.Count; i++)
         {
-            ItemsRequired = ItemsRequired + dialogData.ChosenQuanityForEach[i] + " " + (dialogData.ChosenQuanityForEach[i] == 1 ? dialogData.ChosenItems[i].itemSingularName : dialogData.ChosenItems[i].itemPluralName) + ", ";
+            StartCoroutine(RunLine(lines[i]));
+            while (true)
+            {
+                if (!isTalking && Input.anyKeyDown)
+                {
+                    break;
+                }
+
+                yield return null;
+            }
         }
 
-        string dialog_ = $"Hello There i Will Need\n {ItemsRequired} \nThanks Have Fun!";
+        MyManager.ShowStartButton();
+    }
 
-        foreach (char letter in dialog_)
+    IEnumerator RunLine(string d)
+    {
+        text_preview = "";
+        isTalking = true;
+        foreach (char letter in d)
         {
             text_preview += letter;
             yield return new WaitForSeconds(letterDelay);
             isTalking = true;
         }
         isTalking = false;
-
         finishedTalking = true;
-        yield return new WaitForSeconds(2f);
-        text_preview = "";
-        StartCoroutine(CheckResults(currentIndex));
     }
 
     private IEnumerator WaitForKeyPress()

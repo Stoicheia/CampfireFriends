@@ -82,6 +82,7 @@ namespace Core
             NavigationData.TransitionWindowIntoMinigame.Play("in");
             yield return new WaitForSeconds(1);
             NavigationData.MinigameManager.SetConfig(config);
+            NavigationData.MinigameManager.gameObject.SetActive(true);
             NavigationData.MainSceneCamera.gameObject.SetActive(false);
             NavigationData.MainSceneCanvas.gameObject.SetActive(false);
             NavigationData.MinigameCamera.gameObject.SetActive(true);
@@ -105,6 +106,7 @@ namespace Core
             NavigationData.MinigameCanvas.gameObject.SetActive(false);
             yield return new WaitForSeconds(0.5f);
             NavigationData.TransitionWindowOutOfMinigame.Play("out");
+            NavigationData.MinigameManager.gameObject.SetActive(false);
             yield return new WaitForSeconds(2);
             NavigationData.TransitionWindowOutOfMinigame.gameObject.SetActive(false);
         }

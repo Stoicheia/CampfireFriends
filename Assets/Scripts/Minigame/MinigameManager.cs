@@ -74,10 +74,9 @@ namespace Minigame
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space) && !_started)
+            if (Input.GetKey(KeyCode.Space) && _started)
             {
                 HandleEnd();
-                _started = true;
             }
         }
 
@@ -95,7 +94,7 @@ namespace Minigame
             }
             _rhythmEngine.SetParams(_minigameConfig);
             _rhythmEngine.StartAudio(countdown);
-            
+            _started = true;
             OnInit?.Invoke();
         }
 
@@ -241,6 +240,7 @@ namespace Minigame
             }
 
             _results = new MinigameResults(goodItems, goodItemTotals, (int) SumOfBadScores, badItemTotal);
+            _started = false;
             OnEnd?.Invoke(_results);
         }
 
