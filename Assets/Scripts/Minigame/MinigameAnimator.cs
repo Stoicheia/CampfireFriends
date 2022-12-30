@@ -26,7 +26,7 @@ namespace Minigame
             _countdown.gameObject.SetActive(false);
         }
 
-        private void ShowEndScreen()
+        private void ShowEndScreen(MinigameResults minigameResults)
         {
             
         }
