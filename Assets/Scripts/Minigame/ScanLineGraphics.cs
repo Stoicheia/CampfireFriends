@@ -14,6 +14,11 @@ namespace Minigame
         [SerializeField] private float _despawnAfterSeconds;
         [SerializeField] private SpriteRenderer _spritePrefab;
 
+        [Space] 
+        [SerializeField] private SpriteRenderer _hitSprite;
+        [SerializeField] private Sprite _inactiveSprite;
+        [SerializeField] private Sprite _activeSprite;
+        
         private Dictionary<ScanEvent, SpriteRenderer> _eventSprites;
         private float Time => _scanLine.Time;
 
@@ -25,15 +30,19 @@ namespace Minigame
         private void OnEnable()
         {
             _scanLine.OnInit += Init;
+            _scanLine.OnHit += Hit;
         }
         
         private void OnDisable()
         {
             _scanLine.OnInit -= Init;
+            _scanLine.OnHit -= Hit;
         }
 
         private void Update()
         {
+            _hitSprite.sprite = _scanLine.IsPressed ? _activeSprite : _inactiveSprite;
+            
             foreach (var s in _eventSprites)
             {
                 ScanEvent @event = s.Key;
@@ -60,6 +69,12 @@ namespace Minigame
                 _eventSprites.Add(s, obj);
                 obj.enabled = false;
             }
+        }
+
+        private void Hit(ScanEvent scanEvent, float f)
+        {
+            if (scanEvent == null) return;
+            _eventSprites[scanEvent].gameObject.SetActive(false);
         }
     }
 }

@@ -34,6 +34,8 @@ namespace Minigame
                 line.OnHit += ProcessHit;
             }
 
+            _rhythmEngine.OnSongEnd += HandleEnd;
+
             _itemsCollected = new Dictionary<PrimitiveItem, float>();
             ResetAllLines();
             GenerateItemsToSpawn(_scanLines.Count * _minigameConfig.TotalBeatCount / _minigameConfig.Subdivisions);
@@ -47,6 +49,8 @@ namespace Minigame
             {
                 line.OnHit -= ProcessHit;
             }
+            
+            _rhythmEngine.OnSongEnd -= HandleEnd;
         }
 
         private void Update()
@@ -63,6 +67,7 @@ namespace Minigame
             foreach (var t in _scanLines)
             {
                 t.Init();
+                t.LeniencySeconds = _minigameConfig.LeniencySeconds;
             }
 
             foreach (var item in _minigameConfig.AllItems)
@@ -101,6 +106,7 @@ namespace Minigame
 
         private void ProcessHit(ScanEvent @event, float t)
         {
+            if (@event == null) return;
             float error = t - @event.TimeSeconds;
             Debug.Log($"{@event.RequestedObject.Name} collected with error {error}");
 
@@ -155,6 +161,11 @@ namespace Minigame
                 float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * _minigameConfig.Bpm * (i/4) / 60;
                 _scanLines[i % _scanLines.Count].AddEvent(new ScanEvent(_itemsToSpawn[i], time));
             }
+        }
+
+        private void HandleEnd()
+        {
+            Debug.Log("End.");
         }
     }
 }

@@ -6,11 +6,14 @@ namespace Minigame
     [RequireComponent(typeof(AudioSource))]
     public class RhythmEngine : MonoBehaviour
     {
+        public event Action OnSongEnd;
+        
         private AudioClip _clip;
         private float _bpm;
         private float _offsetSeconds;
 
         private AudioSource _audioSource;
+        private bool _hasStarted;
 
         public float CurrentTimeSeconds => (float)_audioSource.timeSamples / _clip.frequency;
         public float TotalTimeSeconds => _clip.length;
@@ -23,10 +26,20 @@ namespace Minigame
             _audioSource = GetComponent<AudioSource>();
         }
 
+        private void Update()
+        {
+            if (_hasStarted && !_audioSource.isPlaying)
+            {
+                _hasStarted = false;
+                OnSongEnd?.Invoke();
+            }
+        }
+
         public void StartAudio()
         {
             _audioSource.clip = _clip;
             _audioSource.Play();
+            _hasStarted = true;
         }
 
         public void SetParams(MinigameDefinition definition)

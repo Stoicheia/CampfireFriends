@@ -32,9 +32,12 @@ namespace Minigame
         private ScanEvent _nextEvent;
 
         private bool _started;
+        private ScanEvent _lastTriggeredEvent;
 
         public float Time => _engine.CurrentTimeSeconds;
         public List<ScanEvent> Events => _events;
+        public bool IsPressed => Input.GetKey(_key);
+        public float LeniencySeconds { get; set; }
 
         private void Awake()
         {
@@ -81,7 +84,19 @@ namespace Minigame
         {
             ScanEvent closestEvent =
                 Time - _lastEvent.TimeSeconds < _nextEvent.TimeSeconds - Time ? _lastEvent : _nextEvent;
-            OnHit?.Invoke(closestEvent, Time);
+            
+            if (_lastTriggeredEvent != null)
+            {
+                if (_lastTriggeredEvent.Equals(_lastEvent)) closestEvent = _nextEvent;
+                if (_lastTriggeredEvent.Equals(_nextEvent)) closestEvent = null;
+            }
+
+            if (closestEvent != null && Mathf.Abs(Time - closestEvent.TimeSeconds) <= LeniencySeconds)
+            {
+                _lastTriggeredEvent = closestEvent;
+                OnHit?.Invoke(closestEvent, Time);
+            }
+
             return (closestEvent, Time);
         }
         

@@ -13,18 +13,27 @@ namespace UI
         private Dictionary<PrimitiveItem, MinigameScoreUI> _itemToScoreUI;
         [SerializeField] private ProgressBarUI _progressUI;
 
+        private bool _started = false;
+
         private void OnEnable()
         {
             _game.OnInit += Init;
+            _started = false;
         }
 
         private void OnDisable()
         {
             _game.OnInit -= Init;
         }
-        
+
+        private void Awake()
+        {
+            _itemToScoreUI = new Dictionary<PrimitiveItem, MinigameScoreUI>();
+        }
+
         private void Update()
         {
+            if (!_started) return;
             foreach (var ui in _itemToScoreUI)
             {
                 PrimitiveItem item = ui.Key;
@@ -36,10 +45,19 @@ namespace UI
 
         private void Init()
         {
+            _itemToScoreUI = new Dictionary<PrimitiveItem, MinigameScoreUI>();
             for (int i = 0; i < Math.Min(_scoreUIs.Count, _game.GoodItems.Count); i++)
             {
                 _itemToScoreUI.Add(_game.GoodItems[i], _scoreUIs[i]);
+                _scoreUIs[i].gameObject.SetActive(true);
             }
+            
+            for (int i = Math.Min(_scoreUIs.Count, _game.GoodItems.Count); i < _scoreUIs.Count; i++)
+            {
+                _scoreUIs[i].gameObject.SetActive(false);
+            }
+
+            _started = true;
         }
     }
 }
