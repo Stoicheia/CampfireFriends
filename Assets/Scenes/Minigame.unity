@@ -1147,7 +1147,7 @@ MonoBehaviour:
     TransitionWindowIntoMinigame: {fileID: 0}
     TransitionWindowOutOfMinigame: {fileID: 0}
     MinigameManager: {fileID: 1984847373}
-    MinigameAnimator: {fileID: 0}
+    MinigameAnimator: {fileID: 772884563}
 --- !u!4 &1019022720
 Transform:
   m_ObjectHideFlags: 0
