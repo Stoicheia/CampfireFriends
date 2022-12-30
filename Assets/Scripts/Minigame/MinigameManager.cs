@@ -10,6 +10,8 @@ namespace Minigame
     public class MinigameManager : MonoBehaviour
     {
         public event Action OnInit;
+        public static event Action<ScanLine, bool, HitResult> OnHit;
+        public static event Action<ScanLine, bool, ScanEvent> OnMiss;
         
         [SerializeField] private MinigameDefinition _minigameConfig;
         [SerializeField] private List<ScanLine> _scanLines;
@@ -32,6 +34,7 @@ namespace Minigame
             foreach (var line in _scanLines)
             {
                 line.OnHit += ProcessHit;
+                line.OnMiss += ProcessMiss;
             }
 
             _rhythmEngine.OnSongEnd += HandleEnd;
@@ -48,6 +51,7 @@ namespace Minigame
             foreach (var line in _scanLines)
             {
                 line.OnHit -= ProcessHit;
+                line.OnMiss -= ProcessMiss;
             }
             
             _rhythmEngine.OnSongEnd -= HandleEnd;
@@ -115,16 +119,28 @@ namespace Minigame
             else if (Mathf.Abs(error) <= _minigameConfig.LeniencySeconds) result = HitResult.Hit;
             else result = HitResult.Miss;
 
-            float score = result switch
+            bool isGood = GoodItems.Contains(@event.RequestedObject);
+
+            float score = (isGood, result) switch
             {
-                HitResult.Perfect => 1,
-                HitResult.Hit => 0.5f,
-                HitResult.Miss => 0
+                (true, HitResult.Perfect) => 3,
+                (true, HitResult.Hit) => 1,
+                (false, _) => 1,
+                _ => 0
             };
 
             _itemsCollected[@event.RequestedObject] += score;
             Debug.Log($"{@event.RequestedObject.Name} score = {_itemsCollected[@event.RequestedObject]}");
+            
+            OnHit?.Invoke(@event.FromLine, isGood, result);
         }
+
+        private void ProcessMiss(ScanEvent scanEvent, float f)
+        {
+            bool isGood = GoodItems.Contains(@scanEvent.RequestedObject);
+            OnMiss?.Invoke(scanEvent.FromLine, isGood, scanEvent);
+        }
+        
 
         private void GenerateItemsToSpawn(int totalNumber)
         {
@@ -159,7 +175,8 @@ namespace Minigame
             for (int i = 0; i < _itemsToSpawn.Count; i++)
             {
                 float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * _minigameConfig.Bpm * (i/4) / 60;
-                _scanLines[i % _scanLines.Count].AddEvent(new ScanEvent(_itemsToSpawn[i], time));
+                var line = _scanLines[i % _scanLines.Count];
+                line.AddEvent(new ScanEvent(_itemsToSpawn[i], time, line));
             }
         }
 

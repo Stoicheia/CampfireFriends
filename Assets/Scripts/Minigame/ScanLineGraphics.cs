@@ -10,6 +10,7 @@ namespace Minigame
         [SerializeField] private ScanLine _scanLine;
         [SerializeField] private Transform _top;
         [SerializeField] private Transform _bottom;
+        [SerializeField] private Transform _hitUISpawnPlace;
         [SerializeField] private float _spawnBeforeSeconds;
         [SerializeField] private float _despawnAfterSeconds;
         [SerializeField] private SpriteRenderer _spritePrefab;
@@ -18,9 +19,12 @@ namespace Minigame
         [SerializeField] private SpriteRenderer _hitSprite;
         [SerializeField] private Sprite _inactiveSprite;
         [SerializeField] private Sprite _activeSprite;
-        
+
         private Dictionary<ScanEvent, SpriteRenderer> _eventSprites;
         private float Time => _scanLine.Time;
+
+        public ScanLine Line => _scanLine;
+        public Transform HitUISpawnPlace => _hitUISpawnPlace;
 
         private void Awake()
         {

@@ -14,7 +14,7 @@ namespace UI
 
         public void Set(float score, float total, Sprite sprt)
         {
-            _scoreTextLeft.text = $"{score:0.0}";
+            _scoreTextLeft.text = $"{score}";
             _scoreTextRight.text = ((int)total).ToString();
             _img.sprite = sprt;
         }
