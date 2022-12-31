@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Minigame;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -12,6 +13,10 @@ namespace UI
         [SerializeField] private MinigameScoreUISimple _junkScoreUI;
         private Dictionary<ItemData, MinigameScoreUI> _itemToScoreUI;
         [SerializeField] private ProgressBarUI _progressUI;
+        [SerializeField] private Image _animalImage;
+        [SerializeField] private Sprite _bear;
+        [SerializeField] private Sprite _squirrel;
+        [SerializeField] private Sprite _fox;
 
         private bool _started = false;
 
@@ -45,6 +50,13 @@ namespace UI
 
         private void Init()
         {
+            _animalImage.sprite = _game.CurrentAnimal switch
+            {
+                AnimalType.Bear => _bear,
+                AnimalType.Squirrel => _squirrel,
+                AnimalType.Fox => _fox,
+                _ => throw new ArgumentOutOfRangeException()
+            };
             _itemToScoreUI = new Dictionary<ItemData, MinigameScoreUI>();
             for (int i = 0; i < Math.Min(_scoreUIs.Count, _game.GoodItems.Count); i++)
             {

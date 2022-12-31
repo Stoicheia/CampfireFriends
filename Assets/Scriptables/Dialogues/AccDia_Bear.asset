@@ -15,11 +15,13 @@ MonoBehaviour:
   Dialogue:
   - MinAccuracy: 0
     Line: Um... this is not the stuff I wanted... (FAIL)
-  - MinAccuracy: 50
+  - MinAccuracy: 40
     Line: Not necessarily the worst meal I've had... (OKAY)
-  - MinAccuracy: 80
+  - MinAccuracy: 60
     Line: A lovely meal indeed! (GOOD)
-  - MinAccuracy: 93
+  - MinAccuracy: 80
     Line: Wow, this is amazing! (GREAT!)
+  - MinAccuracy: 95
+    Line: I proclaim you... king of the bears! (NEAR PERFECT!)
   - MinAccuracy: 100
-    Line: The bear of the nine gates shall rise once more... (PERFECT!)
+    Line: The bear of the nine gates shall rise once more... (PERFECT!!)

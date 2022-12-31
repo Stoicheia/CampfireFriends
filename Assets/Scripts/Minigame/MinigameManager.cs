@@ -28,6 +28,7 @@ namespace Minigame
 
         public List<ItemData> GoodItems => _minigameConfig.GoodItems;
         public float Bpm => _minigameConfig.Bpm;
+        public AnimalType CurrentAnimal => _minigameConfig.Animal;
 
         private int TotalItemNumber =>
             _scanLines.Count * _minigameConfig.TotalBeatCount / _minigameConfig.Subdivisions;

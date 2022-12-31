@@ -19,8 +19,9 @@ namespace Entity
         public string GetLine(float acc)
         {
             var line = Dialogue[0].Line;
-            foreach (var l in Dialogue)
+            for (int i = 0; i < Dialogue.Count; i++)
             {
+                var l = Dialogue[i];
                 if (acc >= l.MinAccuracy)
                 {
                     line = l.Line;

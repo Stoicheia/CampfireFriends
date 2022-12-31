@@ -81,6 +81,7 @@ namespace Core
 
         private IEnumerator TransitionToMinigameSequence(MinigameDefinition config)
         {
+            NavigationData.MainSceneCanvas.GetComponent<AudioSource>().Stop();
             NavigationData.TransitionWindowIntoMinigame.gameObject.SetActive(true);
             NavigationData.TransitionWindowIntoMinigame.Play("in");
             yield return new WaitForSeconds(1);
