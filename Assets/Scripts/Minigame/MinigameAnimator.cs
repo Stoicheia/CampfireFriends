@@ -8,6 +8,7 @@ namespace Minigame
     public class MinigameAnimator : MonoBehaviour
     {
         [SerializeField] private CountdownUI _countdown;
+        [SerializeField] private Animator _collectThese;
         [SerializeField] private ResultsScreenUI _resultsScreen;
         [SerializeField] private MinigameManager _game;
 
@@ -28,11 +29,13 @@ namespace Minigame
 
         private IEnumerator StartSequence()
         {
-            _game.enabled = true;
-            _countdown.InitCountdown(_game.Bpm);
             float wait = 4.5f * 60 / _game.Bpm;
+            _game.enabled = true;
+            _game.StartGame(2 + wait);
+            _collectThese.Play("collectThese");
+            yield return new WaitForSeconds(2);
+            _countdown.InitCountdown(_game.Bpm);
             yield return null;
-            _game.StartGame(wait);
             yield return new WaitForSeconds(wait);
             _countdown.gameObject.SetActive(false);
         }

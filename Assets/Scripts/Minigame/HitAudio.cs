@@ -58,13 +58,13 @@ namespace Minigame
         
         IEnumerator GoodHitsoundExpireSeq()
         {
-            yield return new WaitForSeconds(_goodHitsound.length/2);
+            yield return new WaitForSeconds(_goodHitsound.length/4);
             _ongoingGoodHitsound = false;
         }
         
         IEnumerator BadHitsoundExpireSeq()
         {
-            yield return new WaitForSeconds(_badHitsound.length/2);
+            yield return new WaitForSeconds(_badHitsound.length/4);
             _ongoingBadHitsound = false;
         }
         

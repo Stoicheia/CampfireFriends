@@ -54,7 +54,7 @@ public class DialogeMan : MonoBehaviour
         _audio = GetComponent<AudioSource>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _audio.clip = _noises;
         _audio.Play();

@@ -81,6 +81,24 @@ namespace Minigame
             }*/
         }
 
+        public void ReadyGame(float countdown)
+        {
+            foreach (var t in _scanLines)
+            {
+                t.Init();
+                t.LeniencySeconds = _minigameConfig.LeniencySeconds;
+            }
+
+            foreach (var item in _minigameConfig.AllItems)
+            {
+                _itemsCollected[item] = 0;
+            }
+            _rhythmEngine.SetParams(_minigameConfig);
+            _rhythmEngine.StartAudio(countdown);
+            _started = true;
+            OnInit?.Invoke();
+        }
+        
         public void StartGame(float countdown)
         {
             foreach (var t in _scanLines)
