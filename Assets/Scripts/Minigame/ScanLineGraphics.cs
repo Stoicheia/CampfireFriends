@@ -16,9 +16,8 @@ namespace Minigame
         [SerializeField] private SpriteRenderer _spritePrefab;
 
         [Space] 
-        [SerializeField] private SpriteRenderer _hitSprite;
-        [SerializeField] private Sprite _inactiveSprite;
-        [SerializeField] private Sprite _activeSprite;
+        [SerializeField] private Transform _inactiveObject;
+        [SerializeField] private Transform _activeObject;
 
         private Dictionary<ScanEvent, SpriteRenderer> _eventSprites;
         private float Time => _scanLine.Time;
@@ -47,8 +46,17 @@ namespace Minigame
 
         private void Update()
         {
-            _hitSprite.sprite = _scanLine.IsPressed ? _activeSprite : _inactiveSprite;
-            
+            if (_scanLine.IsPressed)
+            {
+                _activeObject.gameObject.SetActive(true);
+                _inactiveObject.gameObject.SetActive(false);
+            }
+            else
+            {
+                _activeObject.gameObject.SetActive(false);
+                _inactiveObject.gameObject.SetActive(true);
+            }
+
             foreach (var s in _eventSprites)
             {
                 ScanEvent @event = s.Key;
