@@ -151,7 +151,7 @@ namespace Core
             {
                 Animator ca = c.GetComponent<Animator>();
                 if (ca == null) continue;
-                if (a != null && !ca.Equals(a))
+                if (!c.Equals(_characters[_ptr]))
                 {
                     ca.Play("sit");
                 }
