@@ -13,6 +13,7 @@ namespace Core
         private PlayerData _data;
         [SerializeField] private List<DialogeMan> _characters;
         [SerializeField] private Animator _startButton;
+        [SerializeField] private Animator _endButton;
         private int _ptr;
 
         private void Awake()
@@ -90,6 +91,12 @@ namespace Core
             _startButton.Play("buttonUp");
             var button = _startButton.GetComponent<MinigameLaunchButton>();
             button.ToLaunch = config;
+        }
+        
+        public void ShowEndButton()
+        {
+            _endButton.gameObject.SetActive(true);
+            _endButton.Play("buttonUp");
         }
 
         IEnumerator StartSequence()

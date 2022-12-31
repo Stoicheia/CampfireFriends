@@ -61,15 +61,15 @@ public class DialogeMan : MonoBehaviour
 
     public void RunInitial()
     {
-        StartCoroutine(RunLines(_dialogueLinesInitial));
+        StartCoroutine(RunLines(_dialogueLinesInitial, false));
     }
     
     public void RunFinal()
     {
-        StartCoroutine(RunLines(_dialogueLinesFinal));
+        StartCoroutine(RunLines(_dialogueLinesFinal, true));
     }
 
-    IEnumerator RunLines(List<string> lines)
+    IEnumerator RunLines(List<string> lines, bool end)
     {
         for (int i = 0; i < lines.Count; i++)
         {
@@ -85,7 +85,14 @@ public class DialogeMan : MonoBehaviour
             }
         }
 
-        MyManager.ShowStartButton(MinigameGiver.Config);
+        if (end)
+        {
+            MyManager.ShowEndButton();
+        }
+        else
+        {
+            MyManager.ShowStartButton(MinigameGiver.Config);
+        }
     }
 
     IEnumerator RunLine(string d)

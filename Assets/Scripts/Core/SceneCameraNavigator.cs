@@ -85,6 +85,7 @@ namespace Core
             NavigationData.TransitionWindowIntoMinigame.Play("in");
             yield return new WaitForSeconds(1);
             NavigationData.MinigameManager.SetConfig(config);
+            yield return null;
             NavigationData.MinigameManager.gameObject.SetActive(true);
             NavigationData.MinigameAnimator.gameObject.SetActive(true);
             NavigationData.MainManager.gameObject.SetActive(false);

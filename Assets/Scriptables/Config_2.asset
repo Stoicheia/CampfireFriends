@@ -35,7 +35,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb7a0eebb5b61ee4ea8944cf4f11e48e, type: 2}
   _goodItemDensity: 0.25
   _goodItemVariance: 0.05
-  _subdivisions: 2
+  _subdivisions: 4
   _leniencyBeats: 0.5
   _perfectExactness: 0.2
   _approachSeconds: 2.2
