@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Minigame;
 using UnityEngine;
 
@@ -22,6 +23,11 @@ namespace Core
             
             Instance = this;
             _animalToResults = new Dictionary<AnimalType, MinigameResults>();
+        }
+
+        private void Update()
+        {
+            int a = 2;
         }
 
         public void AddResult(AnimalType a, MinigameResults r)
