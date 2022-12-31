@@ -22,10 +22,8 @@ namespace Minigame
 
         public float CalculateAccuracyPercent()
         {
-            int numerator =  GoodItemScores.Select(x => x.Value).Aggregate((x,y) => x+y)
-                + BadItemTotal - BadItemScore;
-            int denominator = GoodItemTotals.Select(x => x.Value).Aggregate((x, y) => x + y)
-                              + BadItemTotal;
+            int numerator =  GoodItemScores.Select(x => x.Value).Aggregate((x,y) => x+y) - BadItemScore/2;
+            int denominator = GoodItemTotals.Select(x => x.Value).Aggregate((x, y) => x + y);
             return (float) 100 * numerator / denominator;
         }
     }

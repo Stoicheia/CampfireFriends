@@ -120,6 +120,11 @@ namespace Core
         {
             if (_ptr == 0)
             {
+                _cameraAnim.Play("stayUp");
+                while (!Input.anyKeyDown)
+                {
+                    yield return null;
+                }
                 foreach (var m in _characters)
                 {
                     m.StandingSprite.gameObject.SetActive(false);
@@ -140,22 +145,24 @@ namespace Core
             if (_ptr < _characters.Count)
             {
                 a = _characters[_ptr].GetComponent<Animator>();
-                if (a != null)
-                {
-                    a.Play("enter");
-                    yield return new WaitForSeconds(1.75f);
-                }
             }
 
             foreach (var c in _characters)
             {
                 Animator ca = c.GetComponent<Animator>();
                 if (ca == null) continue;
-                if (!c.Equals(_characters[_ptr]))
+                if (_ptr >= _characters.Count || _characters.IndexOf(c) < _ptr)
                 {
                     ca.Play("sit");
                 }
             }
+            
+            if (a != null)
+            {
+                a.Play("enter");
+                yield return new WaitForSeconds(1.75f);
+            }
+            
             yield return new WaitForSeconds(0.3f);
             NextDialogue();
         }

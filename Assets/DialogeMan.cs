@@ -33,6 +33,7 @@ public class DialogeMan : MonoBehaviour
     public AnimalType AnimalType;
 
     public DialogueSequenceAsset FixedInitialDialogue;
+    public AccuracyDialogueAsset FinalDialogue;
 
     private List<string> _dialogueLinesInitial;
     private List<string> _dialogueLinesFinal;
@@ -46,12 +47,6 @@ public class DialogeMan : MonoBehaviour
     {
         _dialogueLinesInitial = FixedInitialDialogue.Lines;
         _dialogueLinesFinal = new List<string>();
-        switch (AnimalType)
-        {
-            case AnimalType.Bear:
-                _dialogueLinesFinal.Add("sdsds");
-                break;
-        }
     }
 
     private void Update()
@@ -66,6 +61,10 @@ public class DialogeMan : MonoBehaviour
     
     public void RunFinal()
     {
+        float accuracy = PlayerData.Instance.GetAccuracy(AnimalType);
+        string line = FinalDialogue.GetLine(accuracy);
+        _dialogueLinesFinal.Add(line);
+
         StartCoroutine(RunLines(_dialogueLinesFinal, true));
     }
 

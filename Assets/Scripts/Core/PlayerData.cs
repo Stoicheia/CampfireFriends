@@ -10,6 +10,8 @@ namespace Core
 
         private Dictionary<AnimalType, MinigameResults> _animalToResults;
 
+        public float GetAccuracy(AnimalType t) => _animalToResults[t].CalculateAccuracyPercent();
+
         private void Awake()
         {
             if (Instance != null)
