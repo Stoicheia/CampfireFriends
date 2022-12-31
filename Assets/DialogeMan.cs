@@ -38,6 +38,10 @@ public class DialogeMan : MonoBehaviour
     private List<string> _dialogueLinesFinal;
 
     public MainGameManager MyManager;
+
+    public Image StandingSprite;
+    public Image SittingSprite;
+    public RectTransform TextBubble;
     private void Awake()
     {
         _dialogueLinesInitial = FixedInitialDialogue.Lines;

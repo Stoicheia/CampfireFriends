@@ -54,11 +54,32 @@ namespace Core
 
         public void StartCharacterInitialDialogue(DialogeMan man)
         {
+            foreach (var m in _characters)
+            {
+                if (m.Equals(man))
+                {
+                    m.StandingSprite.gameObject.SetActive(true);
+                    m.SittingSprite.gameObject.SetActive(false);
+                    m.TextBubble.gameObject.SetActive(true);
+                }
+                else
+                {
+                    m.StandingSprite.gameObject.SetActive(false);
+                    m.SittingSprite.gameObject.SetActive(false);
+                    m.TextBubble.gameObject.SetActive(false);
+                }
+            }
             man.RunInitial();
         }
         
         public void StartCharacterFinalDialogue(DialogeMan man)
         {
+            foreach (var m in _characters)
+            {
+                m.StandingSprite.gameObject.SetActive(false);
+                m.SittingSprite.gameObject.SetActive(true);
+                m.TextBubble.gameObject.SetActive(true);
+            }
             man.RunFinal();
         }
 
