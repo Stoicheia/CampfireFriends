@@ -240,8 +240,8 @@ MonoBehaviour:
   _spawnBeforeSeconds: 1
   _despawnAfterSeconds: 1
   _spritePrefab: {fileID: 2274680226324589237, guid: 7d3dff098be2b8142bd4c5f4e4a32469, type: 3}
-  _inactiveObject: {fileID: 8637582375314108912}
-  _activeObject: {fileID: 1577764741355578261}
+  _inactiveObject: {fileID: 1577764741355578261}
+  _activeObject: {fileID: 8637582375314108912}
 --- !u!1 &2283116029517708398
 GameObject:
   m_ObjectHideFlags: 0
