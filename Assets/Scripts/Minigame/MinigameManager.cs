@@ -203,7 +203,7 @@ namespace Minigame
 
         private void DistributeToLines()
         {
-            for (int i = 0; i < _itemsToSpawn.Count; i++)
+            for (int i = 0; i < 4 * Math.Floor((float)_itemsToSpawn.Count/4); i++)
             {
                 float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * (int)(i/4) * 60 / _minigameConfig.Bpm;
                 var line = _scanLines[i % _scanLines.Count];

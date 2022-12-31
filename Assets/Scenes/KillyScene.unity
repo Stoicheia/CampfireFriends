@@ -1658,7 +1658,7 @@ MonoBehaviour:
   letterDelay: 0.02
   MinigameGiver: {fileID: 1140430998}
   AnimalType: 0
-  FixedInitialDialogue: {fileID: 11400000, guid: 1e751a7d8249fc64fb713c4da8c741e4, type: 2}
+  FixedInitialDialogue: {fileID: 11400000, guid: 3e76eab6dbd120341be8acd86a6ee6fc, type: 2}
   MyManager: {fileID: 0}
   StandingSprite: {fileID: 1925973778}
   SittingSprite: {fileID: 836128228}
@@ -2001,7 +2001,7 @@ MonoBehaviour:
   letterDelay: 0.02
   MinigameGiver: {fileID: 1566699442}
   AnimalType: 0
-  FixedInitialDialogue: {fileID: 11400000, guid: 1e751a7d8249fc64fb713c4da8c741e4, type: 2}
+  FixedInitialDialogue: {fileID: 11400000, guid: 8f682d4b9a45525469378cef5530cbbc, type: 2}
   MyManager: {fileID: 0}
   StandingSprite: {fileID: 1842297977}
   SittingSprite: {fileID: 657435860}

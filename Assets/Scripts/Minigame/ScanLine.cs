@@ -58,7 +58,7 @@ namespace Minigame
             }
 
             _lastEvent = _events[_ptr];
-            _nextEvent = _events[_ptr + 1];
+            _nextEvent = _ptr == _events.Count - 1 ? null : _events[_ptr + 1];
 
             if (Input.GetKeyDown(_key))
             {

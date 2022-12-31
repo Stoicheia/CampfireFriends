@@ -15,12 +15,13 @@ namespace Minigame
             public ItemData Item;
             public int Quantity;
         }
-        
+
+        private const float UNIVERSAL_OFFSET_SECONDS = 0.12f;
         public AudioClip Clip => _clip;
         public float Bpm => _bpm;
-        public float OffsetSeconds => _offsetSeconds;
+        public float OffsetSeconds => _offsetSeconds + UNIVERSAL_OFFSET_SECONDS;
         public List<ItemData> AllItems => _allPossibleItems;
-        public int TotalBeatCount => (int)Math.Floor(_bpm * _clip.length / 60);
+        public int TotalBeatCount => (int)Math.Floor(_bpm * (_clip.length - _tailLength) / 60);
         public int Subdivisions => _subdivisions;
         public float LeniencySeconds => _leniencyBeats * 60 / _bpm;
         public float LeniencyPerfectSeconds => _perfectExactness * _leniencyBeats * 60 / _bpm;
@@ -39,6 +40,7 @@ namespace Minigame
         [SerializeField] [Range(0, 0.9f)] private float _goodItemDensity;
         [SerializeField] [Range(0, 0.1f)] private float _goodItemVariance;
         [SerializeField] private int _subdivisions;
+        [SerializeField] private float _tailLength;
         [Space] [SerializeField] private float _leniencyBeats;
         [SerializeField][Range(0, 1)] private float _perfectExactness;
         [SerializeField] private float _approachSeconds;

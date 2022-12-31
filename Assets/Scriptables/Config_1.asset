@@ -36,6 +36,7 @@ MonoBehaviour:
   _goodItemDensity: 0.25
   _goodItemVariance: 0.05
   _subdivisions: 4
-  _leniencyBeats: 0.5
-  _perfectExactness: 0.2
+  _tailLength: 4
+  _leniencyBeats: 0.6
+  _perfectExactness: 0.3
   _approachSeconds: 3
