@@ -136,18 +136,22 @@ namespace Core
             }
 
             _startButton.gameObject.SetActive(false);
-            Animator a = _characters[_ptr].GetComponent<Animator>();
-            if (a != null)
+            Animator a = null;
+            if (_ptr < _characters.Count)
             {
-                a.Play("enter");
-                yield return new WaitForSeconds(1.75f);
+                a = _characters[_ptr].GetComponent<Animator>();
+                if (a != null)
+                {
+                    a.Play("enter");
+                    yield return new WaitForSeconds(1.75f);
+                }
             }
 
             foreach (var c in _characters)
             {
                 Animator ca = c.GetComponent<Animator>();
                 if (ca == null) continue;
-                if (!ca.Equals(a))
+                if (a != null && !ca.Equals(a))
                 {
                     ca.Play("sit");
                 }
