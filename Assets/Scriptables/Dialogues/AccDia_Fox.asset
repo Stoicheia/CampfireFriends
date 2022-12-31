@@ -15,11 +15,11 @@ MonoBehaviour:
   Dialogue:
   - MinAccuracy: 0
     Line: Um... this is not the stuff I wanted... (FAIL)
-  - MinAccuracy: 40
+  - MinAccuracy: 50
     Line: Not necessarily the worst meal I've had... (OKAY)
   - MinAccuracy: 70
     Line: A lovely meal indeed! (GOOD)
   - MinAccuracy: 85
     Line: Wow, this is amazing! (GREAT!)
   - MinAccuracy: 100
-    Line: The fox of the concealed triplets shall rise once more... (PERFECT!)
+    Line: How the hell did you do this?? Contact the developers for a reward... (PERFECT!)

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cherry
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 3688a0bbe3b4a5f41bb7022233763532, type: 3}
-  itemSingularName: Cherry
-  itemPluralName: Cherries
+  itemSingularName: Berry
+  itemPluralName: Berries

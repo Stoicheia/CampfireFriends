@@ -97,6 +97,7 @@ namespace Core
                 m.StandingSprite.gameObject.SetActive(false);
                 m.SittingSprite.gameObject.SetActive(true);
                 m.TextBubble.gameObject.SetActive(true);
+                m.GetComponent<Animator>().Play("sitTalk");
             }
             man.RunFinal();
         }

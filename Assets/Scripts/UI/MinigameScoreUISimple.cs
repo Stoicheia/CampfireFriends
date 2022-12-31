@@ -10,7 +10,7 @@ namespace UI
 
         public void Set(float score)
         {
-            _scoreText.text = $"{score:0.0}";
+            _scoreText.text = $"{score:0}";
         }
     }
 }

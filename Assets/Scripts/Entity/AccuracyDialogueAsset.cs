@@ -18,15 +18,16 @@ namespace Entity
 
         public string GetLine(float acc)
         {
+            var line = Dialogue[0].Line;
             foreach (var l in Dialogue)
             {
                 if (acc >= l.MinAccuracy)
                 {
-                    return l.Line;
+                    line = l.Line;
                 }
             }
 
-            return Dialogue[0].Line;
+            return line;
         }
     }
 }

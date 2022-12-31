@@ -1348,6 +1348,8 @@ MonoBehaviour:
   _img: {fileID: 866719287191886302}
   _scoreTextLeft: {fileID: 5079453623692783737}
   _scoreTextRight: {fileID: 163751473964985131}
+  _minColor: {r: 0.3018868, g: 0, b: 0, a: 1}
+  _maxColor: {r: 0.5343085, g: 1, b: 0.3830189, a: 1}
 --- !u!1 &8091307697456418365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1406,8 @@ MonoBehaviour:
   _img: {fileID: 1856265043759714832}
   _scoreTextLeft: {fileID: 8293892928278320947}
   _scoreTextRight: {fileID: 1021521360714569355}
+  _minColor: {r: 0, g: 0, b: 0, a: 0}
+  _maxColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8680017031087181460
 GameObject:
   m_ObjectHideFlags: 0

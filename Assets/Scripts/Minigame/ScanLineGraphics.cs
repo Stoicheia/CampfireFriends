@@ -57,7 +57,14 @@ namespace Minigame
                 _inactiveObject.gameObject.SetActive(true);
             }
 
-            if (Line.Finished) return;
+            if (Line.Finished)
+            {
+                foreach (var s in _eventSprites)
+                {
+                    s.Value.enabled = false;
+                }
+                return;
+            }
             foreach (var s in _eventSprites)
             {
                 ScanEvent @event = s.Key;
