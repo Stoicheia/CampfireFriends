@@ -25,6 +25,7 @@ namespace Minigame
         public float OffsetSeconds => _offsetSeconds;
 
         public bool IsPlaying => _audioSource.isPlaying;
+        public bool Finished;
 
         private void Awake()
         {
@@ -36,12 +37,14 @@ namespace Minigame
             if (_hasStarted && !_audioSource.isPlaying)
             {
                 _hasStarted = false;
+                Finished = true;
                 OnSongEnd?.Invoke();
             }
         }
 
         public void StartAudio(float countdown = 0)
         {
+            Finished = false;
             StartCoroutine(Countdown(countdown));
         }
 

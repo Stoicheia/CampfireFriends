@@ -43,6 +43,7 @@ namespace Minigame
         public bool IsPressed => Input.GetKey(_key);
         public float LeniencySeconds { get; set; }
         public float ApproachRate { get; set; }
+        public bool Finished => _engine.Finished;
 
         private void Awake()
         {
@@ -65,7 +66,7 @@ namespace Minigame
                 Hit();
             }
 
-            while (Time > _events[_missPtr].TimeSeconds + LeniencySeconds)
+            while (_missPtr < _events.Count && Time > _events[_missPtr].TimeSeconds + LeniencySeconds)
             {
                 OnMiss?.Invoke(_events[_missPtr], Time);
                 _missPtr++;
@@ -95,9 +96,17 @@ namespace Minigame
         // return value: (event, time of hit)
         public (ScanEvent, float) Hit()
         {
-            ScanEvent closestEvent =
-                Time - _lastEvent.TimeSeconds < _nextEvent.TimeSeconds - Time ? _lastEvent : _nextEvent;
-            
+            ScanEvent closestEvent;
+            if (_nextEvent != null)
+            {
+                closestEvent =
+                    Time - _lastEvent.TimeSeconds < _nextEvent.TimeSeconds - Time ? _lastEvent : _nextEvent;
+            }
+            else
+            {
+                closestEvent = _lastEvent;
+            }
+
             if (_lastTriggeredEvent != null)
             {
                 if (_lastTriggeredEvent.Equals(_lastEvent)) closestEvent = _nextEvent;

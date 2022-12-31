@@ -14,7 +14,10 @@ namespace Core
         [SerializeField] private List<DialogeMan> _characters;
         [SerializeField] private Animator _startButton;
         [SerializeField] private Animator _endButton;
+        [SerializeField] private Animator _cameraAnim;
         private int _ptr;
+
+        public int CurrentStep => _ptr;
 
         private void Awake()
         {
@@ -55,13 +58,17 @@ namespace Core
 
         public void StartCharacterInitialDialogue(DialogeMan man)
         {
-            foreach (var m in _characters)
+            int k = 0;
+            for (int i = _characters.Count - 1; i >= 0; i--)
             {
+                var m = _characters[i];
                 if (m.Equals(man))
                 {
                     m.StandingSprite.gameObject.SetActive(true);
                     m.SittingSprite.gameObject.SetActive(false);
                     m.TextBubble.gameObject.SetActive(true);
+                    k = i;
+                    break;
                 }
                 else
                 {
@@ -70,6 +77,16 @@ namespace Core
                     m.TextBubble.gameObject.SetActive(false);
                 }
             }
+
+            for (int i = k - 1; i >= 0; i--)
+            {
+                var m = _characters[i];
+                m.StandingSprite.gameObject.SetActive(false);
+                m.SittingSprite.gameObject.SetActive(true);
+                m.TextBubble.gameObject.SetActive(false);
+            }
+            
+           
             man.RunInitial();
         }
         
@@ -101,7 +118,40 @@ namespace Core
 
         IEnumerator StartSequence()
         {
+            if (_ptr == 0)
+            {
+                foreach (var m in _characters)
+                {
+                    m.StandingSprite.gameObject.SetActive(false);
+                    m.SittingSprite.gameObject.SetActive(false);
+                    m.TextBubble.gameObject.SetActive(false);
+                }
+                _cameraAnim.Play("intro");
+                yield return new WaitForSeconds(2f);
+            }
+
+            else
+            {
+                _cameraAnim.Play("idle");
+            }
+
             _startButton.gameObject.SetActive(false);
+            Animator a = _characters[_ptr].GetComponent<Animator>();
+            if (a != null)
+            {
+                a.Play("enter");
+                yield return new WaitForSeconds(1.75f);
+            }
+
+            foreach (var c in _characters)
+            {
+                Animator ca = c.GetComponent<Animator>();
+                if (ca == null) continue;
+                if (!ca.Equals(a))
+                {
+                    ca.Play("sit");
+                }
+            }
             yield return new WaitForSeconds(0.3f);
             NextDialogue();
         }
