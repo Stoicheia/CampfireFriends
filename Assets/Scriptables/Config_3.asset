@@ -37,6 +37,6 @@ MonoBehaviour:
   _goodItemVariance: 0.05
   _subdivisions: 2
   _tailLength: 4
-  _leniencyBeats: 0.5
-  _perfectExactness: 0.25
-  _approachSeconds: 1.75
+  _leniencyBeats: 0.65
+  _perfectExactness: 0.3
+  _approachSeconds: 1.85

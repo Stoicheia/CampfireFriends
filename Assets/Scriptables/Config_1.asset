@@ -36,5 +36,5 @@ MonoBehaviour:
   _subdivisions: 4
   _tailLength: 4
   _leniencyBeats: 0.6
-  _perfectExactness: 0.25
-  _approachSeconds: 3.5
+  _perfectExactness: 0.4
+  _approachSeconds: 3.6

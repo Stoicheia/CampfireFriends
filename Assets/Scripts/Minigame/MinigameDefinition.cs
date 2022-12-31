@@ -16,7 +16,7 @@ namespace Minigame
             public int Quantity;
         }
 
-        private const float UNIVERSAL_OFFSET_SECONDS = 0.12f;
+        private const float UNIVERSAL_OFFSET_SECONDS = 0.05f;
         public AudioClip Clip => _clip;
         public float Bpm => _bpm;
         public float OffsetSeconds => _offsetSeconds + UNIVERSAL_OFFSET_SECONDS;

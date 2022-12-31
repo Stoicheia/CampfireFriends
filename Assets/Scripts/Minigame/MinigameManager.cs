@@ -75,10 +75,10 @@ namespace Minigame
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space) && _started)
+            /*if (Input.GetKey(KeyCode.Space) && _started)
             {
                 HandleEnd();
-            }
+            }*/
         }
 
         public void StartGame(float countdown)

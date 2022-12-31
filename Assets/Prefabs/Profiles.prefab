@@ -1459,7 +1459,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dislikes  : disturbancest'
+  m_text: 'Dislikes : disturbances'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f810bcd11488e5f4e94d6fbba5e2826e, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: db0cfd02a60f3b94ca51c12118c66e6f, type: 2}
@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.8
+  m_fontSize: 49.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -11,6 +11,7 @@ public enum AnimalType
     Bear, Squirrel, Fox
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class DialogeMan : MonoBehaviour
 {
     public int currentIndex = 0;
@@ -43,10 +44,21 @@ public class DialogeMan : MonoBehaviour
     public Image StandingSprite;
     public Image SittingSprite;
     public RectTransform TextBubble;
+
+    [Space] public AudioClip _noises;
+    private AudioSource _audio;
     private void Awake()
     {
         _dialogueLinesInitial = FixedInitialDialogue.Lines;
         _dialogueLinesFinal = new List<string>();
+        _audio = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        _audio.clip = _noises;
+        _audio.Play();
+        _audio.Pause();
     }
 
     private void Update()
@@ -98,12 +110,14 @@ public class DialogeMan : MonoBehaviour
     {
         text_preview = "";
         isTalking = true;
+        _audio.UnPause();
         foreach (char letter in d)
         {
             text_preview += letter;
             yield return new WaitForSeconds(letterDelay);
             isTalking = true;
         }
+        _audio.Pause();
         isTalking = false;
         finishedTalking = true;
     }
