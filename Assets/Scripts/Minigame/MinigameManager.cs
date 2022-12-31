@@ -119,7 +119,7 @@ namespace Minigame
 
         public float GetSongProgress()
         {
-            return _rhythmEngine.CurrentTimeSeconds / _rhythmEngine.TotalTimeSeconds;
+            return _rhythmEngine.Finished ? 1 : _rhythmEngine.CurrentTimeSeconds / _rhythmEngine.TotalTimeSeconds;
         }
 
         private void ProcessHit(ScanEvent @event, float t)

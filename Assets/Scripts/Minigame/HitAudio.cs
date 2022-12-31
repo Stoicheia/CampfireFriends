@@ -10,6 +10,7 @@ namespace Minigame
         private AudioSource _audio;
         [SerializeField] private AudioClip _goodHitsound;
         [SerializeField] private AudioClip _badHitsound;
+        [SerializeField] private AudioClip _missSound;
 
         private bool _ongoingGoodHitsound;
         private bool _ongoingBadHitsound;
@@ -22,11 +23,13 @@ namespace Minigame
         private void OnEnable()
         {
             MinigameManager.OnHit += ProcessHit;
+            MinigameManager.OnMiss += ProcessMiss;
         }
         
         private void OnDisable()
         {
             MinigameManager.OnHit -= ProcessHit;
+            MinigameManager.OnMiss -= ProcessMiss;
         }
 
         private void ProcessHit(ScanLine scanLine, bool b, HitResult arg3)
@@ -45,6 +48,14 @@ namespace Minigame
             }
         }
 
+        private void ProcessMiss(ScanLine scanLine, bool b, ScanEvent arg3)
+        {
+            if (!b) return;
+            _audio.volume -= 0.5f;
+            _audio.PlayOneShot(_missSound);
+            _audio.volume += 0.5f;
+        }
+        
         IEnumerator GoodHitsoundExpireSeq()
         {
             yield return new WaitForSeconds(_goodHitsound.length/2);

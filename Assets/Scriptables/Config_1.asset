@@ -33,10 +33,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bfd13272752148a48b07dd4c7706c884, type: 2}
   - {fileID: 11400000, guid: 6c748644bfe25844aa428b8adea91200, type: 2}
   - {fileID: 11400000, guid: cb7a0eebb5b61ee4ea8944cf4f11e48e, type: 2}
-  _goodItemDensity: 0.25
+  _goodItemDensity: 0.32
   _goodItemVariance: 0.05
   _subdivisions: 4
   _tailLength: 4
   _leniencyBeats: 0.6
-  _perfectExactness: 0.3
-  _approachSeconds: 3
+  _perfectExactness: 0.25
+  _approachSeconds: 3.5
