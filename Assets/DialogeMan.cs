@@ -87,7 +87,7 @@ public class DialogeMan : MonoBehaviour
             StartCoroutine(RunLine(lines[i]));
             while (true)
             {
-                if (!isTalking && Input.anyKeyDown)
+                if (!isTalking && Input.anyKeyDown && !Input.GetMouseButtonDown(0))
                 {
                     break;
                 }

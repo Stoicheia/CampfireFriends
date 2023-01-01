@@ -75,10 +75,7 @@ namespace Minigame
 
         private void Update()
         {
-            /*if (Input.GetKey(KeyCode.Space) && _started)
-            {
-                HandleEnd();
-            }*/
+            
         }
 
         public void ReadyGame(float countdown)
@@ -227,6 +224,14 @@ namespace Minigame
                 float time = _minigameConfig.OffsetSeconds + _minigameConfig.Subdivisions * (int)(i/4) * 60 / _minigameConfig.Bpm;
                 var line = _scanLines[i % _scanLines.Count];
                 line.AddEvent(new ScanEvent(_itemsToSpawn[i], time, line));
+            }
+        }
+
+        public void TryEnd()
+        {
+            if (_started && _rhythmEngine.CurrentTimeSeconds > 0)
+            {
+                HandleEnd();
             }
         }
 

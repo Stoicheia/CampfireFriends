@@ -32,7 +32,7 @@ namespace Core
 
         public void AddResult(AnimalType a, MinigameResults r)
         {
-            _animalToResults.Add(a, r);
+            _animalToResults[a] = r;
         }
     }
 }
